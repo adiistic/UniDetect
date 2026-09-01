@@ -1,0 +1,4 @@
+# UniDetect Project Dependencies
+# Note: Dependencies will be installed in future steps.
+
+pandas
