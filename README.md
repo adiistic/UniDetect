@@ -33,6 +33,10 @@ Traffic Copy / PCAP / PCAPNG
   (src/ingestion/zeek_reader.py)
               │
               ▼
+    Local Checkpoint Manager
+  (src/ingestion/checkpoint.py)
+              │
+              ▼
       Normalized Flow Model
    (src/models/flow_record.py)
               │
@@ -68,11 +72,13 @@ unidetect/
 │   │   └── extractor.py
 │   ├── ingestion/
 │   │   ├── __init__.py
+│   │   ├── checkpoint.py
 │   │   └── zeek_reader.py
 │   ├── __init__.py
 │   ├── main.py
 │   └── README.md
 ├── tests/
+│   ├── test_checkpoint.py
 │   ├── test_feature_extractor.py
 │   ├── test_flow_record.py
 │   ├── test_zeek_reader.py
@@ -81,6 +87,20 @@ unidetect/
 ├── requirements.txt
 └── README.md
 ```
+
+---
+
+## 🔖 State & Checkpoint Management (`src/ingestion/checkpoint.py`)
+
+UniDetect includes a local `CheckpointManager` module in preparation for future near-real-time incremental Zeek log ingestion.
+
+### Key Principles & Policy:
+- **Purpose**: Persists file read positions and identity metadata so incremental readers can resume processing across runs without reprocessing normal records.
+- **Default Checkpoint Path**: `data/.unidetect_checkpoint.json` (configurable via `CheckpointManager(checkpoint_path=...)`).
+- **Authoritative Resume Position**: Byte offset (`offset`) is the sole authoritative position for resuming ingestion.
+- **File Identity Metadata**: Records canonical file paths, byte sizes, OS inodes (`inode`), and device IDs (`device`) across platforms to track log files.
+- **Atomic Writes**: Writes updated state to a `.tmp` file in the checkpoint directory before executing an atomic file replacement (`os.replace`) to prevent state corruption during ungraceful shutdowns.
+- **Corrupt Checkpoint Policy**: If a checkpoint file is unparseable or malformed, `CheckpointManager` emits a warning, preserves the corrupt file on disk, and initializes a valid empty in-memory state.
 
 ---
 
