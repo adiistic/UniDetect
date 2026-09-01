@@ -1,4 +1,4 @@
-# UniDetect - Passive Network Traffic Analysis
+# UniDetect - Passive Network Traffic Analysis (SIH Problem Statement 145)
 
 UniDetect is a university cybersecurity prototype designed to demonstrate **PASSIVE network traffic analysis**.
 
@@ -13,7 +13,7 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 - **No Scanning**: UniDetect must **NOT** scan active or inactive devices.
 - **No Probing**: UniDetect must **NOT** probe network hosts.
 - **No Inline Blocking or Modification**: UniDetect must **NOT** block, alter, or delay live network traffic.
-- **No Socket Connections**: Analysis is performed strictly offline or near-real-time from logs/captures on disk.
+- **No Socket Connections**: Analysis is performed strictly offline or near-real-time from logs on disk.
 
 ---
 
@@ -26,13 +26,14 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 - **Checkpoint Management**: Atomic JSON state persistence for byte resume offsets (`src/ingestion/checkpoint.py`).
 - **Incremental Log Reader**: Binary tailing of growing log files, binary byte-offset seeking, partial-line buffering, and truncation detection (`src/ingestion/incremental_reader.py`).
 - **Local Zeek Log Watcher**: Polling-based log watcher detecting file changes across multiple log files and triggering incremental ingestion (`src/ingestion/watcher.py`).
+- **Controlled Live Zeek Runner**: Foreground runner script directing active passive interface monitoring into dedicated live log directories (`scripts/run_zeek_live.sh`).
 
-### ⏳ NOT YET IMPLEMENTED (Future Milestones)
-- **Live Zeek Packet Observation**: Live Zeek engine execution on mirrored interface.
-- **Live Packet Capture**: Active packet capture drivers.
-- **Dummy Website Traffic Generation**: Automated test traffic generators.
-- **Machine Learning / Threat Classification**: ML detection engines.
-- **FastAPI / REST Backend**: Backend service endpoints.
+### ⏳ FUTURE STEPS (Not Implemented Yet)
+- **Live Watcher Integration**: End-to-end integration connecting `ZeekLogWatcher` to the active live log directory in real-time.
+- **End-to-End Controlled Traffic Testing**: Laboratory testing using simulated traffic against the live ingestion pipeline.
+- **Security Feature Engineering**: Advanced domain/flow behavioral feature sets.
+- **Machine Learning / Threat Classification**: ML anomaly and threat detection models.
+- **FastAPI / REST Backend**: Backend service endpoints for alert streaming.
 - **Web Dashboard**: Interactive user interface.
 
 ---
@@ -42,6 +43,8 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 ```
 unidetect/
 ├── data/
+│   ├── live_zeek_logs/
+│   │   └── README.md
 │   ├── pcaps/
 │   ├── zeek_logs/
 │   └── README.md
@@ -49,6 +52,8 @@ unidetect/
 │   ├── alerts/
 │   ├── reports/
 │   └── README.md
+├── scripts/
+│   └── run_zeek_live.sh
 ├── src/
 │   ├── models/
 │   │   ├── __init__.py
@@ -80,22 +85,49 @@ unidetect/
 
 ---
 
-## 👁️ Local Log Watcher (`src/ingestion/watcher.py`)
+## 🐧 Windows + WSL Live Zeek Setup & Execution
 
-The `ZeekLogWatcher` monitors local Zeek log files using lightweight polling and coordinates with `IncrementalZeekReader` to stream new entries without modifying log files.
+### 1. Verify Zeek Installation (WSL / Ubuntu)
+```bash
+zeek --version
+# Expected: zeek version 8.x.x
+```
 
-### Key Features:
-- **Polling-Based Change Detection**: Cross-platform polling (`poll_once()`) using file size, inode, and checkpoint offset comparisons.
-- **Multiple File Support**: Monitors `conn.log`, `dns.log`, etc., independently.
-- **Missing File Resilience**: Gracefully skips missing files during poll passes; automatically detects and processes files if created later.
-- **Error Isolation**: Catches and logs errors on individual files without crashing or halting the watcher loop for other files.
-- **FlowRecord Integration**: Returns normalized `FlowRecord` DTOs directly when querying connection logs.
+### 2. Discover Network Interfaces
+Identify the interface on which Zeek will passively observe traffic:
+```bash
+ip -br link
+# or
+ip link
+```
+
+### 3. Start Live Zeek Runner
+Run the controlled Zeek runner with your target interface and desired output directory:
+```bash
+# Default output directory (data/live_zeek_logs):
+./scripts/run_zeek_live.sh eth0
+
+# Or with custom native Linux path (recommended for WSL performance):
+./scripts/run_zeek_live.sh eth0 ~/unidetect-live/logs
+```
+
+### 4. Verify Live Log Generation
+Open a second terminal in WSL to observe newly generated Zeek logs:
+```bash
+# List generated log files:
+ls -lah data/live_zeek_logs
+
+# Follow connection logs in real-time:
+tail -f data/live_zeek_logs/conn.log
+```
+
+> **Note**: To stop Zeek monitoring, press `Ctrl+C` in the runner terminal.
 
 ---
 
-## 🚀 Execution & Usage
+## 🚀 Existing Pipeline Execution
 
-### 1. Ingestion Summary Only
+### 1. Ingestion Summary
 ```bash
 python src/main.py --log-dir data/zeek_logs
 ```
