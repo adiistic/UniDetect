@@ -1,0 +1,10 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	ntp
+#open	2026-09-01-10-00-00
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	version	mode	stratum	poll	precision	root_delay	root_disp	reference_id	reference_time	origin_time	receive_time	transmit_time	num_exts
+#types	time	string	addr	port	addr	port	count	count	count	interval	interval	interval	interval	string	time	time	time	time	count
+1618317003.100000	CH432114	192.168.1.50	123	162.159.200.123	123	4	3	2	6.000000	0.000001	0.005000	0.010000	162.159.200.1	1618317000.000000	1618317003.090000	1618317003.095000	1618317003.095100	0
+#close	2026-09-01-10-05-00

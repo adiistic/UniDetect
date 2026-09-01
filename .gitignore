@@ -9,20 +9,6 @@ env/
 venv/
 ENV/
 
-# Output and runtime data files (ignore actual contents, retain folder structure via .gitkeep/README)
-data/pcaps/*
-!data/pcaps/.gitkeep
-!data/pcaps/README.md
-data/zeek_logs/*
-!data/zeek_logs/.gitkeep
-!data/zeek_logs/README.md
-output/reports/*
-!output/reports/.gitkeep
-!output/reports/README.md
-output/alerts/*
-!output/alerts/.gitkeep
-!output/alerts/README.md
-
 # IDEs & OS artifacts
 .vscode/
 .idea/

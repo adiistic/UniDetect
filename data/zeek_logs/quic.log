@@ -1,0 +1,10 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	quic
+#open	2026-09-01-10-00-00
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	version	server_name	client_initial_dcid
+#types	time	string	addr	port	addr	port	string	string	string
+1618317004.800000	CH432115	192.168.1.50	54321	142.250.190.46	443	0x00000001	www.google.com	a1b2c3d4e5f6
+#close	2026-09-01-10-05-00

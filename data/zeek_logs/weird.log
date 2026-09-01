@@ -1,0 +1,10 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	weird
+#open	2026-09-01-10-00-00
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	name	addl	notice	peer
+#types	time	string	addr	port	addr	port	string	string	bool	string
+1618317002.500000	CH432113	192.168.1.50	59999	192.168.1.200	80	bad_HTTP_request	-	F	zeek
+#close	2026-09-01-10-05-00
