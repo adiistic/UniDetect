@@ -17,37 +17,21 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ Implementation Status & Roadmap
 
-UniDetect receives mirrored network traffic or offline packet capture/log files, ingests raw records, normalizes flow records, extracts behavioral features, and produces structured analysis summaries.
+### ✅ IMPLEMENTED NOW
+- **Offline Zeek Log Ingestion**: Batch reading of `conn.log`, `dns.log`, `weird.log`, `ntp.log`, and `quic.log` (`src/ingestion/zeek_reader.py`).
+- **FlowRecord Normalization DTO**: Standardized flow schema for `conn.log` entries (`src/models/flow_record.py`).
+- **Feature Extraction**: Derived metrics (`total_bytes`, `total_packets`, `bytes_per_packet`, `answer_count`) and aggregate stats (`src/features/extractor.py`).
+- **Checkpoint Management**: Atomic JSON state persistence for byte resume offsets (`src/ingestion/checkpoint.py`).
+- **Incremental Log Reader**: Binary tailing of growing log files, binary byte-offset seeking, partial-line buffering, and truncation detection (`src/ingestion/incremental_reader.py`).
 
-```
-Traffic Copy / PCAP / PCAPNG
-              │
-              ▼
-          Zeek Logs
- (conn.log, dns.log, etc.)
-              │
-              ▼
-      Zeek Log Ingestion
-  (src/ingestion/zeek_reader.py)
-              │
-              ▼
-    Local Checkpoint Manager
-  (src/ingestion/checkpoint.py)
-              │
-              ▼
-      Normalized Flow Model
-   (src/models/flow_record.py)
-              │
-              ▼
-      Feature Extraction
- (src/features/extractor.py)
-              │
-              ▼
-   Structured Behavioral Data
-    (Alerts & Reports Input)
-```
+### ⏳ NOT YET IMPLEMENTED (Future Milestones)
+- **Filesystem Watcher / Poller Loop**: Continuous file watching loops.
+- **Live Zeek Capture Runner**: Integration with active network SPAN/TAP taps.
+- **Machine Learning / Threat Classification**: ML detection engines.
+- **FastAPI / REST Backend**: API service endpoints.
+- **Web Dashboard**: Interactive user interface.
 
 ---
 
@@ -73,6 +57,7 @@ unidetect/
 │   ├── ingestion/
 │   │   ├── __init__.py
 │   │   ├── checkpoint.py
+│   │   ├── incremental_reader.py
 │   │   └── zeek_reader.py
 │   ├── __init__.py
 │   ├── main.py
@@ -81,6 +66,7 @@ unidetect/
 │   ├── test_checkpoint.py
 │   ├── test_feature_extractor.py
 │   ├── test_flow_record.py
+│   ├── test_incremental_reader.py
 │   ├── test_zeek_reader.py
 │   └── __init__.py
 ├── .gitignore
@@ -90,46 +76,15 @@ unidetect/
 
 ---
 
-## 🔖 State & Checkpoint Management (`src/ingestion/checkpoint.py`)
+## 🔖 Incremental Log Reader (`src/ingestion/incremental_reader.py`)
 
-UniDetect includes a local `CheckpointManager` module in preparation for future near-real-time incremental Zeek log ingestion.
+The `IncrementalZeekReader` prepares UniDetect for future near-real-time ingestion by tailing active Zeek log files without re-reading previously processed records.
 
-### Key Principles & Policy:
-- **Purpose**: Persists file read positions and identity metadata so incremental readers can resume processing across runs without reprocessing normal records.
-- **Default Checkpoint Path**: `data/.unidetect_checkpoint.json` (configurable via `CheckpointManager(checkpoint_path=...)`).
-- **Authoritative Resume Position**: Byte offset (`offset`) is the sole authoritative position for resuming ingestion.
-- **File Identity Metadata**: Records canonical file paths, byte sizes, OS inodes (`inode`), and device IDs (`device`) across platforms to track log files.
-- **Atomic Writes**: Writes updated state to a `.tmp` file in the checkpoint directory before executing an atomic file replacement (`os.replace`) to prevent state corruption during ungraceful shutdowns.
-- **Corrupt Checkpoint Policy**: If a checkpoint file is unparseable or malformed, `CheckpointManager` emits a warning, preserves the corrupt file on disk, and initializes a valid empty in-memory state.
-
----
-
-## 📊 Normalized Flow Record Schema (`FlowRecord`)
-
-UniDetect defines a normalized DTO in `src/models/flow_record.py` for structured handoff between Person 1's ingestion layer and downstream processing:
-
-```json
-{
-  "timestamp": 1618317000.123,
-  "uid": "CH432111",
-  "source": {"ip": "192.168.1.50", "port": 51234},
-  "destination": {"ip": "192.168.1.1", "port": 53},
-  "network": {"protocol": "udp", "service": "dns"},
-  "metrics": {
-    "duration": 0.002341,
-    "orig_bytes": 45,
-    "resp_bytes": 110,
-    "total_bytes": 155,
-    "orig_packets": 1,
-    "resp_packets": 1,
-    "total_packets": 2,
-    "bytes_per_packet": 77.5,
-    "missed_bytes": 0
-  },
-  "connection_state": "SF",
-  "metadata": {"history": "Dd", "local_orig": "-"}
-}
-```
+### Key Features:
+- **Binary Seeking**: Seeks directly to the authoritative byte offset (`start_offset`) stored in `CheckpointManager`.
+- **Incomplete Line Safety**: Ignores incomplete final lines (lines not ending in `\n`) and defers their processing until completion without advancing the saved offset past incomplete data.
+- **Truncation & Replacement Handling**: Resets read offset to 0 if the current file size is smaller than the saved offset or if the file inode/device ID changes.
+- **UTF-8 Byte Safety**: Operates strictly on byte offsets to guarantee character boundary safety across multi-byte UTF-8 encodings.
 
 ---
 
