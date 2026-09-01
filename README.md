@@ -27,13 +27,14 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 - **Incremental Log Reader**: Binary tailing of growing log files, binary byte-offset seeking, partial-line buffering, and truncation detection (`src/ingestion/incremental_reader.py`).
 - **Local Zeek Log Watcher**: Polling-based log watcher detecting file changes across multiple log files and triggering incremental ingestion (`src/ingestion/watcher.py`).
 - **Controlled Live Zeek Runner**: Foreground runner script directing active passive interface monitoring into dedicated live log directories (`scripts/run_zeek_live.sh`).
+- **Live Zeek Directory Pipeline**: Integration layer connecting watcher, incremental reader, and checkpointing to actively monitor live Zeek log directories and stream `FlowRecord` objects (`src/ingestion/live_pipeline.py`).
 
-### ⏳ FUTURE STEPS (Not Implemented Yet)
-- **Live Watcher Integration**: End-to-end integration connecting `ZeekLogWatcher` to the active live log directory in real-time.
-- **End-to-End Controlled Traffic Testing**: Laboratory testing using simulated traffic against the live ingestion pipeline.
-- **Security Feature Engineering**: Advanced domain/flow behavioral feature sets.
-- **Machine Learning / Threat Classification**: ML anomaly and threat detection models.
-- **FastAPI / REST Backend**: Backend service endpoints for alert streaming.
+### ⏳ NOT YET IMPLEMENTED (Future Steps)
+- **Controlled Dummy Website Traffic**: Simulated test traffic generation for laboratory validation.
+- **Full Live End-to-End Traffic Validation**: Automated end-to-end integration testing against continuous live traffic.
+- **Security-Specific Feature Engineering**: Advanced behavioral and anomaly feature representations.
+- **Machine Learning / Threat Classification**: ML training, inference, and alert generation.
+- **FastAPI / REST Backend**: Backend service endpoints for live alert streaming.
 - **Web Dashboard**: Interactive user interface.
 
 ---
@@ -65,6 +66,7 @@ unidetect/
 │   │   ├── __init__.py
 │   │   ├── checkpoint.py
 │   │   ├── incremental_reader.py
+│   │   ├── live_pipeline.py
 │   │   ├── watcher.py
 │   │   └── zeek_reader.py
 │   ├── __init__.py
@@ -75,6 +77,7 @@ unidetect/
 │   ├── test_feature_extractor.py
 │   ├── test_flow_record.py
 │   ├── test_incremental_reader.py
+│   ├── test_live_pipeline.py
 │   ├── test_watcher.py
 │   ├── test_zeek_reader.py
 │   └── __init__.py
@@ -85,59 +88,50 @@ unidetect/
 
 ---
 
-## 🐧 Windows + WSL Live Zeek Setup & Execution
+## 🔄 Live Zeek Directory Pipeline (`src/ingestion/live_pipeline.py`)
 
-### 1. Verify Zeek Installation (WSL / Ubuntu)
-```bash
-zeek --version
-# Expected: zeek version 8.x.x
+The `LiveZeekPipeline` connects `ZeekLogWatcher`, `IncrementalZeekReader`, and `CheckpointManager` into a unified pipeline:
+
 ```
-
-### 2. Discover Network Interfaces
-Identify the interface on which Zeek will passively observe traffic:
-```bash
-ip -br link
-# or
-ip link
+Zeek-Generated Log Files (conn.log, dns.log, weird.log)
+                         │
+                         ▼
+        LiveZeekPipeline (`live_pipeline.py`)
+                         │
+                         ▼
+             ZeekLogWatcher (`watcher.py`)
+                         │
+                         ▼
+       IncrementalZeekReader (`incremental_reader.py`)
+                         │
+                         ▼
+         CheckpointManager (`checkpoint.py`)
+                         │
+                         ▼
+         FlowRecord (`models/flow_record.py`)
 ```
-
-### 3. Start Live Zeek Runner
-Run the controlled Zeek runner with your target interface and desired output directory:
-```bash
-# Default output directory (data/live_zeek_logs):
-./scripts/run_zeek_live.sh eth0
-
-# Or with custom native Linux path (recommended for WSL performance):
-./scripts/run_zeek_live.sh eth0 ~/unidetect-live/logs
-```
-
-### 4. Verify Live Log Generation
-Open a second terminal in WSL to observe newly generated Zeek logs:
-```bash
-# List generated log files:
-ls -lah data/live_zeek_logs
-
-# Follow connection logs in real-time:
-tail -f data/live_zeek_logs/conn.log
-```
-
-> **Note**: To stop Zeek monitoring, press `Ctrl+C` in the runner terminal.
 
 ---
 
-## 🚀 Existing Pipeline Execution
+## 🚀 Execution & Usage
 
-### 1. Ingestion Summary
+### 1. Offline Batch Ingestion
 ```bash
 python src/main.py --log-dir data/zeek_logs
 ```
 
-### 2. Feature Extraction Summary (`--show-features`)
+### 2. Offline Feature Extraction Summary
 ```bash
 python src/main.py --log-dir data/zeek_logs --show-features
 ```
 
-### 3. Running All Unit Tests
+### 3. Live Zeek Log Directory Polling Mode
+Demonstrates single-pass incremental polling of an active Zeek log directory:
+```bash
+python src/main.py --live-log-dir data/zeek_logs
+```
+
+### 4. Running All Automated Tests
 ```bash
 python -m unittest discover -s tests
 ```

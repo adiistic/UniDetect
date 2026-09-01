@@ -9,6 +9,10 @@ env/
 venv/
 ENV/
 
+# Local runtime checkpoints
+data/.unidetect_checkpoint.json
+*.tmp*
+
 # IDEs & OS artifacts
 .vscode/
 .idea/
