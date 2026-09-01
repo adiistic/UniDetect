@@ -25,12 +25,14 @@ UniDetect adheres strictly to a **passive security architecture**. Specifically:
 - **Feature Extraction**: Derived metrics (`total_bytes`, `total_packets`, `bytes_per_packet`, `answer_count`) and aggregate stats (`src/features/extractor.py`).
 - **Checkpoint Management**: Atomic JSON state persistence for byte resume offsets (`src/ingestion/checkpoint.py`).
 - **Incremental Log Reader**: Binary tailing of growing log files, binary byte-offset seeking, partial-line buffering, and truncation detection (`src/ingestion/incremental_reader.py`).
+- **Local Zeek Log Watcher**: Polling-based log watcher detecting file changes across multiple log files and triggering incremental ingestion (`src/ingestion/watcher.py`).
 
 ### ⏳ NOT YET IMPLEMENTED (Future Milestones)
-- **Filesystem Watcher / Poller Loop**: Continuous file watching loops.
-- **Live Zeek Capture Runner**: Integration with active network SPAN/TAP taps.
+- **Live Zeek Packet Observation**: Live Zeek engine execution on mirrored interface.
+- **Live Packet Capture**: Active packet capture drivers.
+- **Dummy Website Traffic Generation**: Automated test traffic generators.
 - **Machine Learning / Threat Classification**: ML detection engines.
-- **FastAPI / REST Backend**: API service endpoints.
+- **FastAPI / REST Backend**: Backend service endpoints.
 - **Web Dashboard**: Interactive user interface.
 
 ---
@@ -58,6 +60,7 @@ unidetect/
 │   │   ├── __init__.py
 │   │   ├── checkpoint.py
 │   │   ├── incremental_reader.py
+│   │   ├── watcher.py
 │   │   └── zeek_reader.py
 │   ├── __init__.py
 │   ├── main.py
@@ -67,6 +70,7 @@ unidetect/
 │   ├── test_feature_extractor.py
 │   ├── test_flow_record.py
 │   ├── test_incremental_reader.py
+│   ├── test_watcher.py
 │   ├── test_zeek_reader.py
 │   └── __init__.py
 ├── .gitignore
@@ -76,15 +80,16 @@ unidetect/
 
 ---
 
-## 🔖 Incremental Log Reader (`src/ingestion/incremental_reader.py`)
+## 👁️ Local Log Watcher (`src/ingestion/watcher.py`)
 
-The `IncrementalZeekReader` prepares UniDetect for future near-real-time ingestion by tailing active Zeek log files without re-reading previously processed records.
+The `ZeekLogWatcher` monitors local Zeek log files using lightweight polling and coordinates with `IncrementalZeekReader` to stream new entries without modifying log files.
 
 ### Key Features:
-- **Binary Seeking**: Seeks directly to the authoritative byte offset (`start_offset`) stored in `CheckpointManager`.
-- **Incomplete Line Safety**: Ignores incomplete final lines (lines not ending in `\n`) and defers their processing until completion without advancing the saved offset past incomplete data.
-- **Truncation & Replacement Handling**: Resets read offset to 0 if the current file size is smaller than the saved offset or if the file inode/device ID changes.
-- **UTF-8 Byte Safety**: Operates strictly on byte offsets to guarantee character boundary safety across multi-byte UTF-8 encodings.
+- **Polling-Based Change Detection**: Cross-platform polling (`poll_once()`) using file size, inode, and checkpoint offset comparisons.
+- **Multiple File Support**: Monitors `conn.log`, `dns.log`, etc., independently.
+- **Missing File Resilience**: Gracefully skips missing files during poll passes; automatically detects and processes files if created later.
+- **Error Isolation**: Catches and logs errors on individual files without crashing or halting the watcher loop for other files.
+- **FlowRecord Integration**: Returns normalized `FlowRecord` DTOs directly when querying connection logs.
 
 ---
 
