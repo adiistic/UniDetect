@@ -77,3 +77,30 @@ class ModelInfoResponse(BaseModel):
     calibration_method: str = Field(..., example="sigmoid")
     thresholds: Dict[str, float]
     active_classes: List[str]
+
+
+class DemoAlertIngestRequest(BaseModel):
+    """
+    Schema for controlled demo / replay telemetry ingestion into UniDetect backend.
+    Accepts serialized AlertEvent representations produced by offline/replay inference.
+    """
+    alert_id: str = Field(..., description="Unique UUID for the alert event")
+    flow_uid: str = Field(..., description="Zeek connection UID")
+    timestamp: float = Field(..., description="UNIX epoch timestamp of the flow")
+    timestamp_iso: Optional[str] = Field(None, description="ISO-8601 UTC timestamp")
+    source_ip: str = Field(..., description="Source IPv4/IPv6 address")
+    destination_ip: str = Field(..., description="Destination IPv4/IPv6 address")
+    source_port: int = Field(..., ge=0, le=65535, description="Source transport port")
+    destination_port: int = Field(..., ge=0, le=65535, description="Destination transport port")
+    protocol: str = Field(..., description="Transport protocol (e.g. tcp, udp, icmp)")
+    predicted_class_id: int = Field(..., description="ML predicted integer class identifier")
+    predicted_label: str = Field(..., description="ML predicted threat class label")
+    confidence: float = Field(..., ge=0.0, le=1.0, description="Calibrated confidence score (0.0 - 1.0)")
+    probabilities: Dict[str, float] = Field(default_factory=dict, description="Calibrated class probability distribution")
+    abstained: bool = Field(..., description="Whether inference policy abstained (analyst review required)")
+    decision: str = Field(..., description="Operational decision verdict (AUTOMATED_DETECTION | ANALYST_REVIEW | INFERENCE_ERROR)")
+    model_version: str = Field(..., description="Version of the model that generated the inference")
+    schema_version: str = Field(..., description="Feature schema contract version")
+    processing_time_ms: float = Field(..., ge=0.0, description="Pipeline processing latency in milliseconds")
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="Flow summary metadata (duration, bytes, conn_state)")
+

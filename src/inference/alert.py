@@ -85,6 +85,36 @@ class AlertEvent:
             metadata=metadata or {},
         )
 
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "AlertEvent":
+        """Reconstructs an AlertEvent from a serialized dictionary representation."""
+        ts = float(data["timestamp"])
+        ts_iso = data.get("timestamp_iso")
+        if not ts_iso:
+            ts_iso = datetime.fromtimestamp(ts, tz=timezone.utc).isoformat()
+
+        return cls(
+            alert_id=str(data["alert_id"]),
+            flow_uid=str(data["flow_uid"]),
+            timestamp=ts,
+            timestamp_iso=str(ts_iso),
+            source_ip=str(data["source_ip"]),
+            destination_ip=str(data["destination_ip"]),
+            source_port=int(data["source_port"]),
+            destination_port=int(data["destination_port"]),
+            protocol=str(data["protocol"]).lower(),
+            predicted_class_id=int(data["predicted_class_id"]),
+            predicted_label=str(data["predicted_label"]),
+            confidence=round(float(data["confidence"]), 4),
+            probabilities={str(k): round(float(v), 4) for k, v in data.get("probabilities", {}).items()},
+            abstained=bool(data["abstained"]),
+            decision=str(data["decision"]),
+            model_version=str(data["model_version"]),
+            schema_version=str(data["schema_version"]),
+            processing_time_ms=round(float(data["processing_time_ms"]), 3),
+            metadata=data.get("metadata") or {},
+        )
+
     def to_dict(self) -> Dict[str, Any]:
         """Serializes alert event into a clean dictionary."""
         return asdict(self)

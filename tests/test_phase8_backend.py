@@ -256,6 +256,82 @@ class TestPhase8Backend(unittest.TestCase):
         self.assertIn("text/html", res.headers.get("content-type", ""))
         self.assertIn("UniDetect SOC", res.text)
 
+    def test_demo_alert_ingest_success(self) -> None:
+        """Verify POST /api/v1/demo/alerts ingests valid AlertEvent and populates store."""
+        mock = self._create_mock_alert(aid="demo-ingest-001", label="DDOS", conf=0.98)
+        res = self.client.post("/api/v1/demo/alerts", json=mock.to_dict())
+        self.assertEqual(res.status_code, 201)
+        data = res.json()
+        self.assertEqual(data["alert_id"], "demo-ingest-001")
+        self.assertEqual(data["predicted_label"], "DDOS")
+        self.assertEqual(data["confidence"], 0.98)
+
+        # Verify stored in AlertStore
+        store = self.app.state.app_state.alert_store
+        stored_alert = store.get_alert_by_id("demo-ingest-001")
+        self.assertIsNotNone(stored_alert)
+        self.assertEqual(stored_alert.alert_id, "demo-ingest-001")
+
+        # Verify queryable via GET /api/v1/alerts
+        get_res = self.client.get("/api/v1/alerts")
+        self.assertEqual(get_res.status_code, 200)
+        self.assertEqual(get_res.json()["total"], 1)
+
+    def test_demo_alert_ingest_invalid_payload_422(self) -> None:
+        """Verify POST /api/v1/demo/alerts rejects invalid payloads with 422."""
+        # Missing required fields
+        res_empty = self.client.post("/api/v1/demo/alerts", json={})
+        self.assertEqual(res_empty.status_code, 422)
+
+        # Invalid port number
+        mock = self._create_mock_alert().to_dict()
+        mock["source_port"] = 999999
+        res_invalid_port = self.client.post("/api/v1/demo/alerts", json=mock)
+        self.assertEqual(res_invalid_port.status_code, 422)
+
+        # Invalid confidence bounds (> 1.0)
+        mock2 = self._create_mock_alert().to_dict()
+        mock2["confidence"] = 1.5
+        res_invalid_conf = self.client.post("/api/v1/demo/alerts", json=mock2)
+        self.assertEqual(res_invalid_conf.status_code, 422)
+
+    def test_demo_alert_ingest_updates_status_and_metrics(self) -> None:
+        """Verify POST /api/v1/demo/alerts automatically updates /api/v1/status and /api/v1/metrics."""
+        threat_mock = self._create_mock_alert(aid="demo-t-01", label="C2_BEACON")
+        benign_mock = self._create_mock_alert(aid="demo-b-01", label="BENIGN", conf=0.99, decision="AUTOMATED_DETECTION")
+
+        self.client.post("/api/v1/demo/alerts", json=threat_mock.to_dict())
+        self.client.post("/api/v1/demo/alerts", json=benign_mock.to_dict())
+
+        # Verify status endpoint reflects updated counts
+        status_res = self.client.get("/api/v1/status")
+        self.assertEqual(status_res.status_code, 200)
+        status_data = status_res.json()
+        self.assertEqual(status_data["processed_flow_count"], 2)
+        self.assertEqual(status_data["alert_count"], 1)
+
+        # Verify metrics endpoint reflects per-class breakdown
+        metrics_res = self.client.get("/api/v1/metrics")
+        self.assertEqual(metrics_res.status_code, 200)
+        metrics_data = metrics_res.json()
+        self.assertEqual(metrics_data["total_flows"], 2)
+        self.assertEqual(metrics_data["total_threats"], 1)
+        self.assertEqual(metrics_data["benign_count"], 1)
+        self.assertEqual(metrics_data["per_class_counts"]["C2_BEACON"], 1)
+        self.assertEqual(metrics_data["per_class_counts"]["BENIGN"], 1)
+
+    def test_demo_alert_ingest_websocket_broadcast(self) -> None:
+        """Verify POST /api/v1/demo/alerts broadcasts the alert payload to active WebSocket subscribers."""
+        mock = self._create_mock_alert(aid="demo-ws-broadcast-01", label="RECON")
+        with self.client.websocket_connect("/ws/alerts") as ws:
+            post_res = self.client.post("/api/v1/demo/alerts", json=mock.to_dict())
+            self.assertEqual(post_res.status_code, 201)
+
+            ws_received = ws.receive_json()
+            self.assertEqual(ws_received["alert_id"], "demo-ws-broadcast-01")
+            self.assertEqual(ws_received["predicted_label"], "RECON")
+
 
 if __name__ == "__main__":
     unittest.main()
+

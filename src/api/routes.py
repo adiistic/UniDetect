@@ -5,17 +5,25 @@ FastAPI REST API Routes for UniDetect Monitoring & Threat Alerting
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
-from src.api.dependencies import get_alert_store, get_app_state, get_inference_pipeline
+from src.api.dependencies import (
+    get_alert_store,
+    get_app_state,
+    get_inference_pipeline,
+    get_websocket_manager,
+)
 from src.api.schemas import (
     AlertResponse,
     AlertsListResponse,
+    DemoAlertIngestRequest,
     HealthResponse,
     MetricsResponse,
     ModelInfoResponse,
     StatusResponse,
 )
 from src.api.state import AlertStore, AppState
+from src.api.websocket import WebSocketManager
 from src.features.schema import NUM_FEATURES, THREAT_CLASSES
+from src.inference.alert import AlertEvent
 from src.inference.pipeline import RealtimeInferencePipeline
 
 router = APIRouter()
@@ -182,3 +190,28 @@ def get_model_info(app_state: AppState = Depends(get_app_state)) -> ModelInfoRes
         },
         active_classes=policy.classes,
     )
+
+
+@router.post(
+    "/api/v1/demo/alerts",
+    response_model=AlertResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Controlled Demo & Replay Telemetry Ingestion",
+    tags=["Demo"],
+)
+async def ingest_demo_alert(
+    payload: DemoAlertIngestRequest,
+    store: AlertStore = Depends(get_alert_store),
+    ws_manager: WebSocketManager = Depends(get_websocket_manager),
+) -> AlertResponse:
+    """
+    Controlled demo and replay telemetry ingestion endpoint.
+    Safely receives pre-computed AlertEvent telemetry, stores it in the active AlertStore,
+    updates system counters, and broadcasts the event over WebSocket to connected dashboard clients.
+    Preserves passive security: performs no active packet transmission or network probing.
+    """
+    alert = AlertEvent.from_dict(payload.model_dump())
+    store.add_alert(alert)
+    await ws_manager.broadcast_alert(alert)
+    return AlertResponse(**alert.to_dict())
+

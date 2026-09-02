@@ -13,6 +13,13 @@ ENV/
 data/.unidetect_checkpoint.json
 *.tmp*
 
+# Environment Variables & Local Secrets
+.env
+*.env.local
+*.pem
+*.key
+
+
 # Binary packet captures (exceed GitHub 100MB file limit)
 *.pcap
 *.pcapng

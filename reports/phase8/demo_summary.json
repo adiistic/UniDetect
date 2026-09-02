@@ -20,10 +20,10 @@
       "DNS_TUNNEL": 44,
       "C2_BEACON": 50
     },
-    "average_inference_latency_ms": 21.12,
-    "p95_latency_ms": 23.343
+    "average_inference_latency_ms": 21.619,
+    "p95_latency_ms": 24.732
   },
-  "rest_latency_sample_ms": 5.7,
+  "rest_latency_sample_ms": 2.22,
   "active_classes": [
     "BENIGN",
     "DDOS",
@@ -31,5 +31,15 @@
     "DNS_TUNNEL",
     "C2_BEACON",
     "SLOW_HTTP"
-  ]
+  ],
+  "server_status": {
+    "model_status": "LOADED_AND_ACTIVE",
+    "inference_status": "READY",
+    "pipeline_status": "PASSIVE_INGESTION_READY",
+    "processed_flow_count": 424,
+    "alert_count": 348,
+    "analyst_review_count": 2,
+    "uptime_seconds": 40.42
+  },
+  "websocket_stream_verified": true
 }
