@@ -1,0 +1,17 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-01-18-37-00
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788287812.649193	ChAZh04b2b0qq6IUue	127.0.0.1	60106	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/status	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	60	200	OK	-	-	(empty)	-	-	-	-	-	-	FndUsZ3uFIstQAhlg3	-	text/json
+1788287812.800569	Cq5iCN3FWXvUo5oksf	127.0.0.1	60114	127.0.0.1	8080	1	GET	127.0.0.1:8080	/pages/dashboard.html	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	3118	200	OK	-	-	(empty)	-	-	-	-	-	-	FD7yECd1KtVS4uyil	-	text/html
+1788287812.951668	Connj43eJYAbVUeNdb	127.0.0.1	60124	127.0.0.1	8080	1	POST	127.0.0.1:8080	/api/v1/telemetry	-	1.0	-	-	51	42	200	OK	-	-	(empty)	-	-	-	F54NQD1YKruHvUihjc	-	text/plain	Fs23bn3EW3x2S31nZ8	-	text/json
+1788287813.102801	CSbMI04m3SMxCzjaq2	127.0.0.1	60140	127.0.0.1	8080	1	GET	127.0.0.1:8080	/assets/bundle.bin	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	63488	200	OK	-	-	(empty)	-	-	-	-	-	-	FgyNaB4B65rFxpDeg1	-	text/plain
+1788287813.253656	Ci9PTt2IP1AibqQsHb	127.0.0.1	60150	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/status	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	60	200	OK	-	-	(empty)	-	-	-	-	-	-	FXZaDn2qx5zqthTDbd	-	text/json
+1788287813.404677	CtKjdo3hGnCOoTlJb4	127.0.0.1	60156	127.0.0.1	8080	1	POST	127.0.0.1:8080	/api/v1/upload	-	1.0	-	-	12000	45	200	OK	-	-	(empty)	-	-	-	FFF56f4NnQ2nGsBDG1	-	text/plain	FhF9G22Q58hYSUNnl	-	text/json
+1788287813.555497	CWCKiy1BPAWT5CJL6f	127.0.0.1	60170	127.0.0.1	8080	1	GET	127.0.0.1:8080	/pages/dashboard.html	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	3118	200	OK	-	-	(empty)	-	-	-	-	-	-	F1JJG04ZgwTyLktkBd	-	text/html
+1788287813.706480	CombzN1P5xdFQxj86e	127.0.0.1	60176	127.0.0.1	8080	1	GET	127.0.0.1:8080	/assets/bundle.bin	-	1.0	Mozilla/5.0 (UniDetect-Agent-Test)	-	0	63488	200	OK	-	-	(empty)	-	-	-	-	-	-	FQmUTD2P6CT4UKqe9d	-	text/plain
+#close	2026-09-01-18-37-00

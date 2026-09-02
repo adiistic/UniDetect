@@ -1,0 +1,27 @@
+{
+  "experiment_id": "exp_benign_iperf_001",
+  "label": "BENIGN",
+  "label_id": 0,
+  "traffic_generator": "iperf3",
+  "description": "Baseline benign high-throughput TCP multi-stream and UDP burst traffic generated via iperf3 in isolated WSL2 laboratory",
+  "start_time": 1788287479.6335309,
+  "end_time": 1788287488.1422415,
+  "duration_seconds": 8.509,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:5201"
+  ],
+  "capture_file": "data/experiments/BENIGN/exp_benign_iperf_001/pcap/capture.pcap",
+  "capture_size_bytes": 225319107,
+  "capture_packet_count": 8596,
+  "zeek_log_directory": "data/experiments/BENIGN/exp_benign_iperf_001/zeek",
+  "feature_file": "data/experiments/BENIGN/exp_benign_iperf_001/features/features.jsonl",
+  "total_flows": 5,
+  "total_features": 78,
+  "label_distribution": {
+    "BENIGN": 5
+  },
+  "created_at": "2026-09-01T18:31:34Z"
+}

@@ -1,0 +1,25 @@
+{
+  "experiment_id": "exp_ddos_pilot_001",
+  "label": "DDOS",
+  "label_id": 1,
+  "traffic_generator": "python_syn_flood_emulator",
+  "start_time": 1788285304.5537286,
+  "end_time": 1788285305.1468914,
+  "duration_seconds": 0.593,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/DDOS/exp_ddos_pilot_001/zeek_logs",
+  "total_flows": 148,
+  "total_features": 78,
+  "label_distribution": {
+    "DDOS": 143,
+    "BENIGN": 5
+  },
+  "created_at": "2026-09-01T17:55:06Z"
+}

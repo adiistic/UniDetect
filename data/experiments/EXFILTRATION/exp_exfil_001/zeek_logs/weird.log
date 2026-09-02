@@ -1,0 +1,19 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	weird
+#open	2026-09-01-18-11-54
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	name	addl	notice	peer	source
+#types	time	string	addr	port	addr	port	string	string	bool	string	string
+1788286314.522784	CpjGDilerJGGXw802	127.0.0.1	51028	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286314.623158	CacCaw3KUdrTziW3q2	127.0.0.1	51038	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286314.723485	CSY74v2aDftrZ6MTed	127.0.0.1	51046	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286314.823801	CAt4N74XXP9IwzqJi8	127.0.0.1	51048	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286314.924079	CsctGzAHJ3qF6DZp2	127.0.0.1	51058	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286315.024349	CdhMyRPbZ1neb17p1	127.0.0.1	51070	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286315.124707	CT8WS83uQIOBOHExy9	127.0.0.1	51074	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286315.224999	C0Ixd12QHz3Vwi3bhh	127.0.0.1	51076	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286315.325290	CrJAxicdYIzjbviP	127.0.0.1	51082	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+1788286315.425752	CUQAbF462Y3SRjjMtj	127.0.0.1	51086	127.0.0.1	9090	truncated_tcp_payload	-	F	zeek	TCP
+#close	2026-09-01-18-11-55

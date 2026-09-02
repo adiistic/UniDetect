@@ -195,3 +195,11 @@ def extract_all_features(log_data: Dict[str, List[Dict[str, Any]]]) -> Dict[str,
         "dns": dns_features,
         "summary": summary,
     }
+
+
+# High-Level Numerical Matrix Extraction API (Person 2 - Phase 4)
+from src.features.vector_assembler import (
+    FeatureVectorAssembler,
+    extract_feature_matrix,
+)
+from src.features.schema import FEATURE_COLUMNS, NUM_FEATURES

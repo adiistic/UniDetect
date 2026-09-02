@@ -1,0 +1,19 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	files
+#open	2026-09-01-18-37-00
+#fields	ts	fuid	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	source	depth	analyzers	mime_type	filename	duration	local_orig	is_orig	seen_bytes	total_bytes	missing_bytes	overflow_bytes	timedout	parent_fuid	md5	sha1	sha256	extracted	extracted_cutoff	extracted_size
+#types	time	string	string	addr	port	addr	port	string	count	set[string]	string	string	interval	bool	bool	count	count	count	count	bool	string	string	string	string	string	bool	count
+1788287812.650208	FndUsZ3uFIstQAhlg3	ChAZh04b2b0qq6IUue	127.0.0.1	60106	127.0.0.1	8080	HTTP	0	(empty)	text/json	-	0.000000	T	F	60	60	0	0	F	-	-	-	-	-	-	-
+1788287812.801336	FD7yECd1KtVS4uyil	Cq5iCN3FWXvUo5oksf	127.0.0.1	60114	127.0.0.1	8080	HTTP	0	(empty)	text/html	-	0.000000	T	F	3118	3118	0	0	F	-	-	-	-	-	-	-
+1788287812.951668	F54NQD1YKruHvUihjc	Connj43eJYAbVUeNdb	127.0.0.1	60124	127.0.0.1	8080	HTTP	0	(empty)	text/plain	-	0.000000	T	T	51	51	0	0	F	-	-	-	-	-	-	-
+1788287812.952293	Fs23bn3EW3x2S31nZ8	Connj43eJYAbVUeNdb	127.0.0.1	60124	127.0.0.1	8080	HTTP	0	(empty)	text/json	-	0.000000	T	F	42	42	0	0	F	-	-	-	-	-	-	-
+1788287813.103363	FgyNaB4B65rFxpDeg1	CSbMI04m3SMxCzjaq2	127.0.0.1	60140	127.0.0.1	8080	HTTP	0	(empty)	text/plain	-	0.000007	T	F	63488	63488	0	0	F	-	-	-	-	-	-	-
+1788287813.254172	FXZaDn2qx5zqthTDbd	Ci9PTt2IP1AibqQsHb	127.0.0.1	60150	127.0.0.1	8080	HTTP	0	(empty)	text/json	-	0.000000	T	F	60	60	0	0	F	-	-	-	-	-	-	-
+1788287813.404677	FFF56f4NnQ2nGsBDG1	CtKjdo3hGnCOoTlJb4	127.0.0.1	60156	127.0.0.1	8080	HTTP	0	(empty)	text/plain	-	0.000000	T	T	12000	12000	0	0	F	-	-	-	-	-	-	-
+1788287813.405216	FhF9G22Q58hYSUNnl	CtKjdo3hGnCOoTlJb4	127.0.0.1	60156	127.0.0.1	8080	HTTP	0	(empty)	text/json	-	0.000000	T	F	45	45	0	0	F	-	-	-	-	-	-	-
+1788287813.556116	F1JJG04ZgwTyLktkBd	CWCKiy1BPAWT5CJL6f	127.0.0.1	60170	127.0.0.1	8080	HTTP	0	(empty)	text/html	-	0.000000	T	F	3118	3118	0	0	F	-	-	-	-	-	-	-
+1788287813.707056	FQmUTD2P6CT4UKqe9d	CombzN1P5xdFQxj86e	127.0.0.1	60176	127.0.0.1	8080	HTTP	0	(empty)	text/plain	-	0.000008	T	F	63488	63488	0	0	F	-	-	-	-	-	-	-
+#close	2026-09-01-18-37-00

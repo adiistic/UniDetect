@@ -1,0 +1,26 @@
+{
+  "experiment_id": "exp_slowhttp_001",
+  "label": "SLOW_HTTP",
+  "label_id": 7,
+  "traffic_generator": "python_slowloris_emulator",
+  "start_time": 1788286310.8784528,
+  "end_time": 1788286311.5938277,
+  "duration_seconds": 0.715,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/SLOW_HTTP/exp_slowhttp_001/zeek_logs",
+  "total_flows": 20,
+  "total_features": 78,
+  "label_distribution": {
+    "SLOW_HTTP": 20
+  },
+  "created_at": "2026-09-01T18:11:52Z"
+}

@@ -1,0 +1,26 @@
+{
+  "experiment_id": "exp_c2beacon_001",
+  "label": "C2_BEACON",
+  "label_id": 5,
+  "traffic_generator": "python_c2_periodic_beacon",
+  "start_time": 1788286302.6829853,
+  "end_time": 1788286307.938376,
+  "duration_seconds": 5.255,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/C2_BEACON/exp_c2beacon_001/zeek_logs",
+  "total_flows": 15,
+  "total_features": 78,
+  "label_distribution": {
+    "C2_BEACON": 15
+  },
+  "created_at": "2026-09-01T18:11:49Z"
+}

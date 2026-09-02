@@ -1,0 +1,26 @@
+{
+  "experiment_id": "exp_dnstunnel_001",
+  "label": "DNS_TUNNEL",
+  "label_id": 4,
+  "traffic_generator": "python_dns_tunnel_synthesizer",
+  "start_time": 1788286298.0217733,
+  "end_time": 1788286299.5331304,
+  "duration_seconds": 1.511,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/DNS_TUNNEL/exp_dnstunnel_001/zeek_logs",
+  "total_flows": 25,
+  "total_features": 78,
+  "label_distribution": {
+    "DNS_TUNNEL": 25
+  },
+  "created_at": "2026-09-01T18:11:41Z"
+}

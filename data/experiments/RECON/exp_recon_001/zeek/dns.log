@@ -1,0 +1,15 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#open	2026-09-01-19-05-13
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	trans_id	rtt	query	qclass	qclass_name	qtype	qtype_name	rcode	rcode_name	AA	TC	RD	RA	Z	answers	TTLs	rejected
+#types	time	string	addr	port	addr	port	enum	count	interval	string	count	string	count	string	count	string	bool	bool	bool	bool	count	vector[string]	vector[interval]	bool
+1788289503.477691	CpE5EP1PijbTbiPflh	10.255.255.254	56180	10.255.255.254	53	udp	37667	0.024201	1.0.0.127.in-addr.arpa	1	C_INTERNET	12	PTR	0	NOERROR	F	F	T	T	0	localhost	85824.000000	F
+1788289503.502027	ChZo6s4VzaqpXnH4xj	10.255.255.254	40185	10.255.255.254	53	udp	43034	0.001527	localhost	1	C_INTERNET	1	A	0	NOERROR	T	F	T	F	0	127.0.0.1	1200.000000	F
+1788289503.503613	CcO4zudvRkEv5YDta	10.255.255.254	48162	10.255.255.254	53	udp	11481	0.000924	localhost	1	C_INTERNET	28	AAAA	0	NOERROR	T	F	T	F	0	::1	1200.000000	F
+1788289503.504616	CtQVOx4c45ehvo5Hag	10.255.255.254	57977	10.255.255.254	53	udp	37209	0.006656	1.0.0.127.in-addr.arpa	1	C_INTERNET	12	PTR	0	NOERROR	F	F	T	T	0	localhost	85824.000000	F
+1788289503.511340	CpOkdg3B16D2MUju09	10.255.255.254	41800	10.255.255.254	53	udp	46264	0.000910	localhost	1	C_INTERNET	1	A	0	NOERROR	T	F	T	F	0	127.0.0.1	1200.000000	F
+1788289503.512297	C5Lk7C1cntFt2kjls4	10.255.255.254	49903	10.255.255.254	53	udp	59815	0.000736	localhost	1	C_INTERNET	28	AAAA	0	NOERROR	T	F	T	F	0	::1	1200.000000	F
+#close	2026-09-01-19-05-13

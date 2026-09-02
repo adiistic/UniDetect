@@ -1,0 +1,17 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-09-01-18-56-59
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1788289016.821984	CGzzFs3asdRjU3Dmp2	127.0.0.1	42974	127.0.0.1	443	tcp	ssl	0.002026	1817	41229	RSTO	T	T	0	ShADadfR	8	2241	6	41549	-	6
+1788289016.665498	CXb1Vm19g8wYKwiSEl	127.0.0.1	42958	127.0.0.1	443	tcp	ssl	0.002088	10841	3344	RSTO	T	T	0	ShADadfR	7	11213	6	3664	-	6
+1788289016.508487	CXDuG53pVyWPI5imIi	127.0.0.1	42944	127.0.0.1	443	tcp	ssl	0.002753	1819	41229	RSTO	T	T	0	ShADadfR	8	2243	6	41549	-	6
+1788289016.382347	CFhXMD1ekdAlkfxzMb	127.0.0.1	42942	127.0.0.1	443	tcp	ssl	0.002277	1804	3360	RSTO	T	T	0	ShADadfR	7	2176	6	3680	-	6
+1788289016.256730	CbLoMJ2BgzwgTqHxaa	127.0.0.1	42936	127.0.0.1	443	tcp	ssl	0.002093	1822	5636	RSTO	T	T	0	ShADadfR	8	2246	6	5956	-	6
+1788289016.130808	CBVu3f4oZAmPoKtMcd	127.0.0.1	42920	127.0.0.1	443	tcp	ssl	0.002030	6194	3344	RSTO	T	T	0	ShADadfR	7	6566	6	3664	-	6
+1788289016.003789	CyqQgo4As2UtWPHugl	127.0.0.1	42912	127.0.0.1	443	tcp	ssl	0.002501	1822	3360	RSTO	T	T	0	ShADadfR	7	2194	6	3680	-	6
+1788289015.876190	CnMNg92wsIoXoMUKg2	127.0.0.1	42898	127.0.0.1	443	tcp	ssl	0.003275	1813	3360	RSTO	T	T	0	ShADadfR	7	2185	6	3680	-	6
+#close	2026-09-01-18-56-59

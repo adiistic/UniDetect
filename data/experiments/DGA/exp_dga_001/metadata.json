@@ -1,0 +1,26 @@
+{
+  "experiment_id": "exp_dga_001",
+  "label": "DGA",
+  "label_id": 3,
+  "traffic_generator": "python_dga_algorithm_emitter",
+  "start_time": 1788286293.3170128,
+  "end_time": 1788286294.829125,
+  "duration_seconds": 1.512,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/DGA/exp_dga_001/zeek_logs",
+  "total_flows": 30,
+  "total_features": 78,
+  "label_distribution": {
+    "DGA": 30
+  },
+  "created_at": "2026-09-01T18:11:36Z"
+}

@@ -1,0 +1,26 @@
+{
+  "experiment_id": "exp_benign_001",
+  "label": "BENIGN",
+  "label_id": 0,
+  "traffic_generator": "python_http_benign_client",
+  "start_time": 1788286282.2041407,
+  "end_time": 1788286283.4331074,
+  "duration_seconds": 1.229,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8088",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090",
+    "127.0.0.1:9099"
+  ],
+  "capture_file": null,
+  "zeek_log_directory": "data/experiments/BENIGN/exp_benign_001/zeek_logs",
+  "total_flows": 30,
+  "total_features": 78,
+  "label_distribution": {
+    "BENIGN": 30
+  },
+  "created_at": "2026-09-01T18:11:24Z"
+}

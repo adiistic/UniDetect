@@ -1,0 +1,29 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#open	2026-09-01-18-41-24
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	trans_id	rtt	query	qclass	qclass_name	qtype	qtype_name	rcode	rcode_name	AA	TC	RD	RA	Z	answers	TTLs	rejected
+#types	time	string	addr	port	addr	port	enum	count	interval	string	count	string	count	string	count	string	bool	bool	bool	bool	count	vector[string]	vector[interval]	bool
+1788288079.682703	CDKNFJzH3m4U9dY0i	127.0.0.1	58793	127.0.0.1	53	udp	24038	0.000144	db.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288079.763189	CHQAVT3OaNt7ZXbw8j	127.0.0.1	47881	127.0.0.1	53	udp	27400	0.000139	portal.corp.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288079.843702	C8NXX32wZrXq1V0RHa	127.0.0.1	56675	127.0.0.1	53	udp	45931	0.000085	auth.service.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288079.924053	CtqW1t2u3hvozqK5s8	127.0.0.1	47950	127.0.0.1	53	udp	34136	0.000129	node01.database-cluster.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.004577	CQXgRgqbL629V82I6	127.0.0.1	49941	127.0.0.1	53	udp	24725	0.000097	metrics.monitoring.infra.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.085076	CGsBAyWVnQyy7Cy8d	127.0.0.1	50049	127.0.0.1	53	udp	64424	0.000080	build-server-2.us-east-1.dev.cloud.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.185611	CODG7L1zkSn7Q50YEh	127.0.0.1	33251	127.0.0.1	53	udp	35498	0.000103	logging-agent-prod.monitoring.us-west.infra.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.286057	C9atBu1AhxFfNiQfxb	127.0.0.1	38633	127.0.0.1	53	udp	15991	0.000102	k8s-ingress.primary.east.network.company.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.386543	C2KSSm4L9kuJTm8I5i	127.0.0.1	34528	127.0.0.1	53	udp	61530	0.000104	api-gateway-v2.edge.service.prod.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288080.487007	CuXUtK2WgisPmoru99	127.0.0.1	38349	127.0.0.1	53	udp	7932	0.000098	mail.internal.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 39 v=spf1 include:_spf.internal.local ~all	300.000000	F
+1788288080.567500	Cz4q0437ApkdPT5GQf	127.0.0.1	38576	127.0.0.1	53	udp	13486	0.000085	domainkey.auth.internal.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 39 v=spf1 include:_spf.internal.local ~all	300.000000	F
+1788288080.647839	CFaTtg4FbvyBvWIR27	127.0.0.1	48400	127.0.0.1	53	udp	58482	0.000098	_spf.gateway.company.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 39 v=spf1 include:_spf.internal.local ~all	300.000000	F
+1788288080.728440	CXeNH83u7XhU31SzF5	127.0.0.1	38381	127.0.0.1	53	udp	25675	0.000107	roundrobin.cluster.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1,127.0.0.2,127.0.0.3	300.000000,300.000000,300.000000	F
+1788288080.808846	C1BLVD3AiKjW8Y3MC8	127.0.0.1	34820	127.0.0.1	53	udp	4558	0.000096	roundrobin.cluster.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1,127.0.0.2,127.0.0.3	300.000000,300.000000,300.000000	F
+1788288080.889386	CTXDox1VGRmNG4rqj9	127.0.0.1	54661	127.0.0.1	53	udp	2235	-	legacy-portal-deprecated.internal.local	1	C_INTERNET	1	A	3	NXDOMAIN	F	F	T	F	0	-	-	T
+1788288080.969801	C7GF7pYxKT7tRmvZk	127.0.0.1	49458	127.0.0.1	53	udp	35541	-	temp-staging-01.missing.local	1	C_INTERNET	1	A	3	NXDOMAIN	F	F	T	F	0	-	-	T
+1788288081.050140	C7Ebcs3NnyOxbivR56	127.0.0.1	45116	127.0.0.1	53	udp	19368	-	unknown-test-service.infra.local	1	C_INTERNET	1	A	3	NXDOMAIN	F	F	T	F	0	-	-	T
+1788288081.130846	CCS2TO3cXPxRLNDvBl	127.0.0.1	47130	127.0.0.1	53	udp	3223	0.000107	ntp-pool.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288081.381277	CE310A4HYodDiOfcih	127.0.0.1	43011	127.0.0.1	53	udp	26477	0.000089	ntp-pool.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788288081.631726	C14fBa3WhO6vSaA0Uj	127.0.0.1	53706	127.0.0.1	53	udp	55578	0.000103	ntp-pool.internal.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+#close	2026-09-01-18-41-24

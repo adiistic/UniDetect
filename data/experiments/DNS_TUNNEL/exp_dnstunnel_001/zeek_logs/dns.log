@@ -1,0 +1,34 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#open	2026-09-01-18-11-38
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	trans_id	rtt	query	qclass	qclass_name	qtype	qtype_name	rcode	rcode_name	AA	TC	RD	RA	Z	answers	TTLs	rejected
+#types	time	string	addr	port	addr	port	enum	count	interval	string	count	string	count	string	count	string	bool	bool	bool	bool	count	vector[string]	vector[interval]	bool
+1788286298.022063	CYr6P5akX271k9SI4	127.0.0.1	40380	127.0.0.1	5353	udp	30937	0.000107	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq0.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.082612	CRN21Nenmi6y1mpfj	127.0.0.1	43484	127.0.0.1	5353	udp	42621	0.000154	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq1.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.142989	CbAd1p3dOgCRTUiom5	127.0.0.1	43089	127.0.0.1	5353	udp	1569	0.000078	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq2.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.203460	C2tVXKt81rvltmDok	127.0.0.1	45593	127.0.0.1	5353	udp	18313	0.000146	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq3.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.264012	CyDwAv3L97Z3l6D1Xd	127.0.0.1	42141	127.0.0.1	5353	udp	7177	0.000156	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq4.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.324461	CSHNHX1yFHok13BO5l	127.0.0.1	58471	127.0.0.1	5353	udp	24774	0.000103	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq5.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.385009	C552hv1tDp2omxx8t2	127.0.0.1	44068	127.0.0.1	5353	udp	38386	0.000115	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq6.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.445462	CM50rHZ68vFoDCQBe	127.0.0.1	36494	127.0.0.1	5353	udp	12356	0.000109	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq7.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.505893	C1jHlC3saKoBYUkOJl	127.0.0.1	60034	127.0.0.1	5353	udp	50464	0.000106	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq8.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.566431	CMYFMnMXklubJ22Ca	127.0.0.1	60629	127.0.0.1	5353	udp	17726	0.000102	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq9.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.626840	CLNwLX2lUOiY0hgBbe	127.0.0.1	34105	127.0.0.1	5353	udp	54275	0.000085	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq10.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.687242	CbE9zd10jieWLFu9C9	127.0.0.1	43121	127.0.0.1	5353	udp	14561	0.000133	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq11.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.747760	CorEhK17mk8zQBARU	127.0.0.1	34308	127.0.0.1	5353	udp	11064	0.000114	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq12.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.808180	CWP5v420IJYn37ewC1	127.0.0.1	40338	127.0.0.1	5353	udp	64919	0.000136	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq13.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.868800	CwhNxN2SCWsEbE4sv4	127.0.0.1	52970	127.0.0.1	5353	udp	46374	0.000081	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq14.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286298.929278	CRtfWU3aAALddu8sHi	127.0.0.1	57246	127.0.0.1	5353	udp	14414	0.000117	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq15.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286298.989673	CobuhbSOB5Z9Qlg4f	127.0.0.1	44268	127.0.0.1	5353	udp	52254	0.000095	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq16.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286299.050084	CflXzo2yLDJYssVIn	127.0.0.1	38450	127.0.0.1	5353	udp	32112	0.000093	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq17.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286299.110566	CLnonG4OM0nWiWyDK2	127.0.0.1	38787	127.0.0.1	5353	udp	19337	0.000122	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq18.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286299.170915	Ce9cGXBocvUlUBLFk	127.0.0.1	34784	127.0.0.1	5353	udp	37197	0.000092	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq19.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286299.231252	CRtn263gQgVEtq7FOc	127.0.0.1	32827	127.0.0.1	5353	udp	10303	0.000093	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq20.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286299.291606	CKBPE72PLAlNCF1cKc	127.0.0.1	45449	127.0.0.1	5353	udp	42287	0.000223	cgfzc3dvcmrfagfzagvzx2r1bxbfy2h1bmtfmdi=.seq21.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286299.352075	Ck5H1A3LFTeRtJmaX8	127.0.0.1	45861	127.0.0.1	5353	udp	57494	0.000119	zxhmawx0cmf0aw9ux292zxjfzg5zx3r1bm5lbf9jahvuazaz.seq22.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+1788286299.412414	CL9ySk1Q35PqtpLP99	127.0.0.1	56389	127.0.0.1	5353	udp	13803	0.000129	c2vjcmv0x3byb2ply3rfzmlszv9jahvua18wna==.seq23.tunnel.test.local	1	C_INTERNET	10	NULL	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788286299.472901	Ckhgzn3bv7OcEiSZi4	127.0.0.1	39028	127.0.0.1	5353	udp	47753	0.000086	dghpcy1pcy1hlwtlewxvz2dlci1legzpbhryyxrpb24tcgfja2v0lte.seq24.tunnel.test.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 36 tunnel-ack-payload-sequence-received	300.000000	F
+#close	2026-09-01-18-11-39

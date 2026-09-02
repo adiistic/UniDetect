@@ -1,0 +1,19 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-09-01-18-11-55
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1788286315.325230	CrJAxicdYIzjbviP	127.0.0.1	51082	127.0.0.1	9090	tcp	-	0.000146	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286315.224940	C0Ixd12QHz3Vwi3bhh	127.0.0.1	51076	127.0.0.1	9090	tcp	-	0.000169	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286315.124641	CT8WS83uQIOBOHExy9	127.0.0.1	51074	127.0.0.1	9090	tcp	-	0.000153	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286314.924014	CsctGzAHJ3qF6DZp2	127.0.0.1	51058	127.0.0.1	9090	tcp	-	0.000179	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286314.823738	CAt4N74XXP9IwzqJi8	127.0.0.1	51048	127.0.0.1	9090	tcp	-	0.000159	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286314.723405	CSY74v2aDftrZ6MTed	127.0.0.1	51046	127.0.0.1	9090	tcp	-	0.000193	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286314.623027	CacCaw3KUdrTziW3q2	127.0.0.1	51038	127.0.0.1	9090	tcp	-	0.000221	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286315.425659	CUQAbF462Y3SRjjMtj	127.0.0.1	51086	127.0.0.1	9090	tcp	-	0.000267	49500	0	SF	T	T	49500	ShADaGFf	6	49820	4	216	-	6
+1788286315.024290	CdhMyRPbZ1neb17p1	127.0.0.1	51070	127.0.0.1	9090	tcp	-	0.000176	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+1788286314.522714	CpjGDilerJGGXw802	127.0.0.1	51028	127.0.0.1	9090	tcp	-	0.000175	49500	0	SF	T	T	49500	ShADaGFf	6	49820	3	164	-	6
+#close	2026-09-01-18-11-55

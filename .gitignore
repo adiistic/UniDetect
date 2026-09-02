@@ -13,6 +13,14 @@ ENV/
 data/.unidetect_checkpoint.json
 *.tmp*
 
+# Binary packet captures (exceed GitHub 100MB file limit)
+*.pcap
+*.pcapng
+*.cap
+
+# Temporary scratch run directories
+scratch/*/
+
 # IDEs & OS artifacts
 .vscode/
 .idea/

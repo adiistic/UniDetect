@@ -1,0 +1,14 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-01-19-05-13
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788289510.264929	CXu8yc2sLVVdGnMbG3	127.0.0.1	53274	127.0.0.1	8080	1	GET	-	/	-	1.0	-	-	0	64	200	OK	-	-	(empty)	-	-	-	-	-	-	F76PMUN0OPYe1VCp2	-	text/json
+1788289510.278387	CfUDbt4lf2cZFRvDS8	127.0.0.1	53276	127.0.0.1	8080	1	POST	127.0.0.1:8080	/sdk	-	1.0	Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)	-	441	482	501	Unsupported method ('POST')	-	-	(empty)	-	-	-	FSrKodSdHbW2gAtV8	-	application/soap+xml	FrCteDMDGw4zV08M9	-	text/html
+1788289510.278831	CszF0RLvKJTn1uHt1	127.0.0.1	53282	127.0.0.1	8080	1	GET	-	/	-	1.0	-	-	0	64	200	OK	-	-	(empty)	-	-	-	-	-	-	FTeVMi3BedT87EqC1i	-	text/json
+1788289510.278851	CDX80Zz4Pbm1XTyJj	127.0.0.1	53284	127.0.0.1	8080	1	GET	127.0.0.1:8080	/nmaplowercheck1788289510	-	1.0	Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)	-	0	64	200	OK	-	-	(empty)	-	-	-	-	-	-	FkLLcbVOmHH9jC8oh	-	text/json
+1788289510.279919	C3BuKo1kNzY3Ib2no8	127.0.0.1	53292	127.0.0.1	8080	1	GET	127.0.0.1:8080	/NmapUpperCheck1788289510	-	1.0	Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)	-	0	64	200	OK	-	-	(empty)	-	-	-	-	-	-	FVESoPkVefrr1shg9	-	text/json
+#close	2026-09-01-19-05-13

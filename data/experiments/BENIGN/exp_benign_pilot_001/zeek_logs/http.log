@@ -1,0 +1,44 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-01-17-54-59
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788285299.379588	C2KWFI1wyjGk0QNUte	127.0.0.1	36680	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	FkCzkG1Se6fHe6qDX6	-	text/plain	FvwtdwShSwTO8uPS3	-	text/json
+1788285299.440250	CdU5td1mpP8kEOxqi7	127.0.0.1	41124	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_1.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FaPdVk459yC8U0JJBl	-	text/html
+1788285299.500955	CjoRjG2se3ZFfXgFZ6	127.0.0.1	41126	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_2.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	Fhl9xq4PauBRfNt5h	-	text/html
+1788285299.561617	CfC3Y5zlbWIuSDQUi	127.0.0.1	41142	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	FqmSU03W2JIAgcqYm	-	text/plain	FwFf1G44xEKnduG5N1	-	text/json
+1788285299.622229	ClFNbVn64RsidVbZg	127.0.0.1	41156	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_4.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FP668bIjWXVsjzP81	-	text/html
+1788285299.682800	Cc6qhP1AMwntB1e7Ak	127.0.0.1	41166	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_5.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FnhWo742ntjhUGjte7	-	text/html
+1788285299.743633	C7mepn2iIqCkAjLLyc	127.0.0.1	41168	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	F9Dvye2jpzMFI2Elt3	-	text/plain	Fcj1KM3yWoVS5dJhm9	-	text/json
+1788285299.804370	CZ1DijM3xuRWq8NUk	127.0.0.1	41174	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_7.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FpYAZHvpGJ6jV8NOd	-	text/html
+1788285299.864980	CH2dmo3VR7E3YaF3rg	127.0.0.1	41188	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_8.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	F2kBed3qZd1biUSvlc	-	text/html
+1788285299.925738	CNRMuF1CM2jZso0oRe	127.0.0.1	41190	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	F82si43dKLhupVL1na	-	text/plain	FCaZ0c3pqRtQcTNAMl	-	text/json
+1788285299.986387	CvrkP44GLKt9sIe4ub	127.0.0.1	41192	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_10.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	Fn0cMmiY1sVmJRm5c	-	text/html
+1788285300.046974	CmpbMs6XfHGKSDaD2	127.0.0.1	41206	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_11.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FR5kLi2on4pJTpS9ui	-	text/html
+1788285300.107684	CgEbyK2UBByaDBwltd	127.0.0.1	41214	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	F0xqde4bWUrJ5E5c12	-	text/plain	FewPF93L9CUBqpdjwj	-	text/json
+1788285300.168326	C7uk8bSpYEltl1obk	127.0.0.1	41222	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_13.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FfKGzh3aFVpr5ujuC3	-	text/html
+1788285300.229261	C06RJq3RZSrie6JUXg	127.0.0.1	41234	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_14.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FB9nGB4Unto6s6ZaE3	-	text/html
+1788285300.290038	C73r8a3HoRGnO6nimd	127.0.0.1	41244	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FkrogY2axtuWMLdVc7	-	text/plain	FwYJyW3GWvXqNDuUR4	-	text/json
+1788285300.351690	CBZWUA3ntQtYmGto16	127.0.0.1	41254	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_16.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FwBwHm1CAvxGU8oBwj	-	text/html
+1788285300.412762	CI6Rpc2vq8QM8PnsBa	127.0.0.1	41270	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_17.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FAdtLL3rdvSLihE1F7	-	text/html
+1788285300.473537	CPPuOOEFIhW9fPzgb	127.0.0.1	41276	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FUxUgnFo3jOD3dFr7	-	text/plain	FK2yfdmV0LoUV52u2	-	text/json
+1788285300.534778	CiyLxK2DCK1fk2Siq4	127.0.0.1	41278	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_19.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FoQ2tH1i9p2CcoaKFk	-	text/html
+1788285300.595827	CqhuCK37VzfaHUZWx5	127.0.0.1	41294	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_20.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FRZnYl1SOKEd59241d	-	text/html
+1788285300.656671	CZaS4R2EEs108B0BS2	127.0.0.1	41302	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FbDPXGFXbulb4bT23	-	text/plain	FeTCVn2V8ZQeJDrBs6	-	text/json
+1788285300.717586	Cs17xL3rZzJVWTaWBg	127.0.0.1	41304	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_22.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	F7en9T3QhRiDktNjJ4	-	text/html
+1788285300.778349	CfOv0j2MdgtAS2Ww6i	127.0.0.1	41306	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_23.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FAWO1EKqMRX74uMld	-	text/html
+1788285300.838975	CfZkzg1qMLY2KSJ6V	127.0.0.1	41308	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FYVjh91r9hM6sKbde7	-	text/plain	FQXi4Z13b4GA2KtiG	-	text/json
+1788285300.900037	CELs544jxDwx9wu2qb	127.0.0.1	41312	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_25.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FoMCzu27xpppJbBwEc	-	text/html
+1788285300.960915	CpCJ4R3OJvuPweydh4	127.0.0.1	41316	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_26.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	F3zX4a4YYr8U1kC0ig	-	text/html
+1788285301.021548	CFHGWy3U1PkjoOwr34	127.0.0.1	41326	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	F7QyvT1lpESRuirZr3	-	text/plain	FWWGLL2qSQHkEhPIdf	-	text/json
+1788285301.082354	CMU0CO1GFSqE9aNyTc	127.0.0.1	41330	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_28.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FNucAc1LtBhTwPjmIb	-	text/html
+1788285301.143021	CthULml7SYaxVw2Uk	127.0.0.1	41344	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_29.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FpajR94Y9UcF8pzGnc	-	text/html
+1788285301.204114	CIumcB3DJVIDeicOja	127.0.0.1	41358	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FQlO1B2kgK61azqHUj	-	text/plain	Ffk7Gk19NvU0dtAHLc	-	text/json
+1788285301.264782	CpgH63H8EuF3qTOUj	127.0.0.1	41370	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_31.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FizvFp3trwZJxczPai	-	text/html
+1788285301.325395	CBLNUd3HvBDBSaoXCh	127.0.0.1	41382	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_32.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FYM0JpqddUHRJVx55	-	text/html
+1788285301.386108	Cm2eTX2b9cvMjCnpG6	127.0.0.1	41390	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	25	47	200	OK	-	-	(empty)	-	-	-	FFiRxgSa30t77Xnt1	-	text/plain	FBk1t22nEGpNMtEmJ3	-	text/json
+1788285301.446629	CRZfy04xr9B5Ymktd3	127.0.0.1	41396	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_34.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FBjdgLFLCyZTcFp57	-	text/html
+#close	2026-09-01-17-55-01

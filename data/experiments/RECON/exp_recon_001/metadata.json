@@ -1,0 +1,46 @@
+{
+  "experiment_id": "exp_recon_001",
+  "label": "RECON",
+  "label_id": 2,
+  "traffic_generator": "nmap (TCP Connect -sT sweep + Service Version -sV interrogation)",
+  "description": "Controlled reconnaissance and port-scanning workload across 45 well-known, registered, and dynamic ports against localhost test services",
+  "start_time": 1788289503.2743871,
+  "end_time": 1788289510.290544,
+  "duration_seconds": 7.016,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:multiple_ports"
+  ],
+  "capture_file": "data/experiments/RECON/exp_recon_001/pcap/capture.pcap",
+  "capture_size_bytes": 17376,
+  "capture_packet_count": 177,
+  "zeek_log_directory": "data/experiments/RECON/exp_recon_001/zeek",
+  "feature_file": "data/experiments/RECON/exp_recon_001/features/features.jsonl",
+  "total_flows": 59,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "scanned_ports_count": 45,
+  "protocol_distribution": {
+    "tcp": 53,
+    "udp": 6
+  },
+  "connection_state_distribution": {
+    "REJ": 43,
+    "RSTO": 4,
+    "SF": 11,
+    "S1": 1
+  },
+  "port_category_counts": {
+    "well_known": 20,
+    "registered": 26,
+    "dynamic": 13
+  },
+  "max_unique_dst_ports_60s": 45.0,
+  "weird_events": [],
+  "label_distribution": {
+    "RECON": 59
+  },
+  "created_at": "2026-09-01T19:05:13Z"
+}

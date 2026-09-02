@@ -1,0 +1,41 @@
+{
+  "experiment_id": "exp_ddos_udp_002",
+  "label": "DDOS",
+  "label_id": 1,
+  "traffic_generator": "hping3 (UDP mode --udp)",
+  "description": "Controlled bounded UDP flood targeting localhost test port at 127.0.0.1:9999 across 256B, 512B, and 1024B datagram payloads",
+  "start_time": 1788289961.8347635,
+  "end_time": 1788289963.6881628,
+  "duration_seconds": 1.853,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:9999"
+  ],
+  "capture_file": "data/experiments/DDOS/exp_ddos_udp_002/pcap/capture.pcap",
+  "capture_size_bytes": 162624,
+  "capture_packet_count": 300,
+  "zeek_log_directory": "data/experiments/DDOS/exp_ddos_udp_002/zeek",
+  "feature_file": "data/experiments/DDOS/exp_ddos_udp_002/features/features.jsonl",
+  "total_flows": 151,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "protocol_distribution": {
+    "udp": 150,
+    "icmp": 1
+  },
+  "connection_state_distribution": {
+    "S0": 150,
+    "OTH": 1
+  },
+  "port_distribution": {
+    "9999": 150,
+    "3": 1
+  },
+  "weird_events": [],
+  "label_distribution": {
+    "DDOS": 151
+  },
+  "created_at": "2026-09-01T19:12:46Z"
+}

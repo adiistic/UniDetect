@@ -1,0 +1,42 @@
+{
+  "experiment_id": "exp_slow_http_001",
+  "label": "SLOW_HTTP",
+  "label_id": 7,
+  "traffic_generator": "slowloris + custom slow-POST socket clients",
+  "description": "Controlled application-layer HTTP resource starvation (slow header and slow body starvation) against localhost port 8080",
+  "start_time": 1788290244.9106412,
+  "end_time": 1788290254.6541796,
+  "duration_seconds": 9.744,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8080"
+  ],
+  "capture_file": "data/experiments/SLOW_HTTP/exp_slow_http_001/pcap/capture.pcap",
+  "capture_size_bytes": 70244,
+  "capture_packet_count": 654,
+  "zeek_log_directory": "data/experiments/SLOW_HTTP/exp_slow_http_001/zeek",
+  "feature_file": "data/experiments/SLOW_HTTP/exp_slow_http_001/features/features.jsonl",
+  "total_flows": 50,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "flow_metrics": {
+    "mean_duration_seconds": 3.2123,
+    "mean_orig_bytes": 167.22,
+    "mean_resp_bytes": 159.74,
+    "mean_packets_per_flow": 13.08
+  },
+  "protocol_distribution": {
+    "tcp": 50
+  },
+  "connection_state_distribution": {
+    "S0": 1,
+    "RSTO": 49
+  },
+  "weird_events": [],
+  "label_distribution": {
+    "SLOW_HTTP": 50
+  },
+  "created_at": "2026-09-01T19:17:37Z"
+}

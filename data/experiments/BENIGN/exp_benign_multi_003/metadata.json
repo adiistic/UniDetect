@@ -1,0 +1,40 @@
+{
+  "experiment_id": "exp_benign_multi_003",
+  "label": "BENIGN",
+  "label_id": 0,
+  "traffic_generator": "hybrid_multi_service (HTTP/REST + DNS + Throttled iperf3)",
+  "description": "Multi-service benign traffic featuring interactive HTTP API requests, chunked asset downloads, internal DNS resolutions, and background sync bursts in isolated WSL2 laboratory",
+  "start_time": 1788287812.6485379,
+  "end_time": 1788287817.7644067,
+  "duration_seconds": 5.116,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8080",
+    "127.0.0.1:5353",
+    "127.0.0.1:5203"
+  ],
+  "capture_file": "data/experiments/BENIGN/exp_benign_multi_003/pcap/capture.pcap",
+  "capture_size_bytes": 3971940,
+  "capture_packet_count": 266,
+  "zeek_log_directory": "data/experiments/BENIGN/exp_benign_multi_003/zeek",
+  "feature_file": "data/experiments/BENIGN/exp_benign_multi_003/features/features.jsonl",
+  "total_flows": 15,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "protocol_distribution": {
+    "udp": 5,
+    "tcp": 10
+  },
+  "port_distribution": {
+    "5353": 5,
+    "5203": 2,
+    "8080": 8
+  },
+  "weird_events": [],
+  "label_distribution": {
+    "BENIGN": 15
+  },
+  "created_at": "2026-09-01T18:37:00Z"
+}

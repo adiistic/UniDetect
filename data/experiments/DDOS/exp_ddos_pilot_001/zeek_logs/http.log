@@ -1,0 +1,17 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-01-17-55-04
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788285304.554559	CCAF6KfyZ21yT1tYf	127.0.0.1	41398	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	F25Ev01BaEQbguOo6j	-	text/plain	FsY3gk2I1s6lqDySAd	-	text/json
+1788285304.615236	CmVeJm1ugTVixrSN8h	127.0.0.1	41412	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_1.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FEDZsB3LszQ6QFtoCk	-	text/html
+1788285304.675783	CFWqE4eU94IKtsGRj	127.0.0.1	41424	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_2.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	Fd2wH12xWAykCRHvzc	-	text/html
+1788285304.736553	CzpbS3Fs7LgOaisne	127.0.0.1	41432	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	FVDDRA1PEH7fKt36bh	-	text/plain	FV2ElC4YONtpREar1j	-	text/json
+1788285304.797083	CS9MbNlWpZ4Erddof	127.0.0.1	41438	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_4.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FPkuHv4H9TgwIlLoD5	-	text/html
+1788285304.857622	CJp8sd2EVFqtjxwCFa	127.0.0.1	41448	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_5.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	Fj6xAGFHuYEqSRac	-	text/html
+1788285304.918200	CRCqwUQ5tPjmq18G5	127.0.0.1	41460	127.0.0.1	8088	1	POST	127.0.0.1:8088	/api/telemetry	-	1.0	-	-	24	47	200	OK	-	-	(empty)	-	-	-	FcirRf41KM7fi7p5z1	-	text/plain	FZYXWB4gp2uzSlryij	-	text/json
+1788285304.978825	CJSGRP1dGU0ToeBiOb	127.0.0.1	41472	127.0.0.1	8088	1	GET	127.0.0.1:8088	/page_7.html	-	1.0	Mozilla/5.0 (UniDetect-Pilot-Client)	-	0	91	200	OK	-	-	(empty)	-	-	-	-	-	-	FE6jpgr64UQWcVjPb	-	text/html
+#close	2026-09-01-17-55-05

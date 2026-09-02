@@ -1,0 +1,44 @@
+{
+  "experiment_id": "exp_benign_tls_005",
+  "label": "BENIGN",
+  "label_id": 0,
+  "traffic_generator": "custom_python_https_tls_client_server",
+  "description": "Comprehensive legitimate TLS/HTTPS traffic experiment populating TLS feature subspace (49-55) with diverse SNIs, GET/POST APIs, and chunked downloads",
+  "start_time": 1788289015.8722804,
+  "end_time": 1788289017.1461763,
+  "duration_seconds": 1.274,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:443"
+  ],
+  "capture_file": "data/experiments/BENIGN/exp_benign_tls_005/pcap/capture.pcap",
+  "capture_size_bytes": 141720,
+  "capture_packet_count": 107,
+  "zeek_log_directory": "data/experiments/BENIGN/exp_benign_tls_005/zeek",
+  "feature_file": "data/experiments/BENIGN/exp_benign_tls_005/features/features.jsonl",
+  "total_flows": 8,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "tls_audit_metrics": {
+    "ssl_flows_total": 8,
+    "sni_len_range": [
+      26.0,
+      38.0
+    ],
+    "sni_entropy_range": [
+      3.5567,
+      4.007
+    ],
+    "outdated_version_count": 0,
+    "self_signed_count": 0,
+    "ja3_count": 0,
+    "resumed_count": 0
+  },
+  "weird_events": [],
+  "label_distribution": {
+    "BENIGN": 8
+  },
+  "created_at": "2026-09-01T18:56:59Z"
+}

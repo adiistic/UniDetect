@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Union
 
 logger = logging.getLogger(__name__)
 
-SUPPORTED_LOG_TYPES = ["conn", "dns", "weird", "ntp", "quic"]
+SUPPORTED_LOG_TYPES = ["conn", "dns", "weird", "ntp", "quic", "ssl", "http", "files", "x509"]
 
 
 def read_zeek_log(file_path: Union[str, Path]) -> List[Dict[str, Any]]:
