@@ -1,0 +1,13 @@
+experiment_id,ground_truth_class,flows_count,threats_detected,benign_detected,analyst_reviews,inference_errors,mean_latency_ms,p50_latency_ms,p95_latency_ms,max_latency_ms,throughput_flows_sec
+exp_benign_iperf_002,BENIGN,9,0,9,0,0,162.27,14.606,813.976,1345.852,6.03
+exp_benign_multi_003,BENIGN,15,0,15,0,0,14.879,15.469,15.951,16.001,48.27
+exp_benign_dns_004,BENIGN,20,0,20,0,0,16.51,16.027,19.703,20.578,54.02
+exp_benign_tls_005,BENIGN,8,0,8,0,0,15.472,15.349,18.405,19.641,49.12
+exp_benign_mixed_006,BENIGN,28,0,28,0,0,15.176,15.473,17.563,18.101,64.69
+exp_benign_periodic_007,BENIGN,63,0,63,0,0,15.797,15.728,19.172,22.07,62.96
+exp_ddos_syn_001,DDOS,150,150,0,0,0,15.736,15.809,18.869,25.717,62.98
+exp_ddos_udp_002,DDOS,151,109,23,19,0,16.333,15.988,20.449,32.596,60.44
+exp_recon_001,RECON,59,54,3,2,0,15.75,15.802,18.5,21.452,59.11
+exp_slow_http_001,SLOW_HTTP,50,50,0,0,0,16.513,16.222,20.264,22.549,55.09
+exp_dns_tunnel_001,DNS_TUNNEL,52,44,8,0,0,16.57,16.233,21.059,22.931,57.38
+exp_c2_beacon_001,C2_BEACON,50,50,0,0,0,15.285,15.218,19.259,24.734,59.14

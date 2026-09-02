@@ -1,0 +1,14 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#open	2026-09-02-08-09-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	trans_id	rtt	query	qclass	qclass_name	qtype	qtype_name	rcode	rcode_name	AA	TC	RD	RA	Z	answers	TTLs	rejected
+#types	time	string	addr	port	addr	port	enum	count	interval	string	count	string	count	string	count	string	bool	bool	bool	bool	count	vector[string]	vector[interval]	bool
+1788336564.025665	CEOBZrVJXYvOxOJJ7	127.0.0.1	35978	127.0.0.1	5353	udp	11249	0.000117	gateway.campus.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788336564.086223	CCgnl03rV6tTtTVVa6	127.0.0.1	58813	127.0.0.1	5353	udp	24266	0.000077	library.univ.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788336564.146775	CsJNLj1x4DJu2REMHc	127.0.0.1	42864	127.0.0.1	5353	udp	16057	0.000138	cs.dept.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788336564.207272	CA3Fhe3GHCG4tONaIl	127.0.0.1	41898	127.0.0.1	5353	udp	61528	0.000129	mail.exchange.local	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 40 v=spf1 include:_spf.campus.internal ~all	300.000000	F
+1788336564.267840	CjHd5o2DzDQn1pd3yh	127.0.0.1	57211	127.0.0.1	5353	udp	11206	0.000091	auth.sso.local	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+#close	2026-09-02-08-09-34

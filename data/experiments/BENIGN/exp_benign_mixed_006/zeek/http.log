@@ -1,0 +1,22 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-02-08-09-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788336564.328669	Ckkqre444hRPpsSJN7	127.0.0.1	45360	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Benign-Client/1.0	-	0	63	200	OK	-	-	(empty)	-	-	-	-	-	-	FxvCoC4CB1feLH7P56	-	text/json
+1788336564.410895	C7DP9v2hwYc6Leg07f	127.0.0.1	43552	127.0.0.1	8000	1	GET	127.0.0.1:8000	/service/metrics	-	1.0	UniDetect-Benign-Client/1.0	-	0	1127	200	OK	-	-	(empty)	-	-	-	-	-	-	Fhm7uK21VEa4KldM9b	-	text/plain
+1788336564.493580	C8jLtKmsT60QYyE6	127.0.0.1	45372	127.0.0.1	8080	1	POST	127.0.0.1:8080	/api/v1/telemetry	-	1.0	-	-	59	52	200	OK	-	-	(empty)	-	-	-	F68McK390WlyuzrhE8	-	text/json	FLK3o93OWucjaErKni	-	text/json
+1788336564.574898	CzaSQw2i68bAe4b7y6	127.0.0.1	43558	127.0.0.1	8000	1	GET	127.0.0.1:8000	/service/ping	-	1.0	UniDetect-Benign-Client/1.0	-	0	4	200	OK	-	-	(empty)	-	-	-	-	-	-	FCE8bd3sws1oOp6WDc	-	-
+1788336564.656042	CPIM0O16DiNfAVTd5e	127.0.0.1	45384	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/users	-	1.0	UniDetect-Benign-Client/1.0	-	0	1374	200	OK	-	-	(empty)	-	-	-	-	-	-	FVh4JM2CoYR23MUWG1	-	text/json
+1788336564.879914	Cua9Oq1KgD489VhuZj	127.0.0.1	45400	127.0.0.1	8080	1	GET	127.0.0.1:8080	/static/app.bundle.js	-	1.0	UniDetect-Benign-Client/1.0	-	0	64000	200	OK	-	-	(empty)	-	-	-	-	-	-	FBMd544qarrVxMqWRb	-	text/plain
+1788336565.031792	CF8AHH3vtYAwAOGn63	127.0.0.1	43566	127.0.0.1	8000	1	POST	127.0.0.1:8000	/service/upload	-	1.0	-	-	31500	53	200	OK	-	-	(empty)	-	-	-	FYQ1ej4HhbBt6meUq	-	text/plain	F6lLd83IK2DTQa1q34	-	text/json
+1788336565.496934	C92agl28GTmrqS7335	127.0.0.1	45402	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/long_poll	-	1.0	UniDetect-Benign-Client/1.0	-	0	51	200	OK	-	-	(empty)	-	-	-	-	-	-	F3WUJm4P3XV3l4Y0c4	-	text/json
+1788336565.698045	CWojhiqG9Z86kzJq1	127.0.0.1	43568	127.0.0.1	8000	1	GET	127.0.0.1:8000	/service/stream	-	1.0	UniDetect-Benign-Client/1.0	-	0	141	200	OK	-	-	(empty)	-	-	-	-	-	-	Fjn33w2u9xMqfjDbEa	-	text/plain
+1788336568.701605	CA9VEO1TSE0PBztuy5	127.0.0.1	45414	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Benign-Client/1.0	-	0	63	200	OK	-	-	(empty)	-	-	-	-	-	-	F5itQK1qO6Riwdk05c	-	text/json
+1788336568.702974	CvVsfq3rXwF8b1qeUj	127.0.0.1	43584	127.0.0.1	8000	1	GET	127.0.0.1:8000	/service/metrics	-	1.0	UniDetect-Benign-Client/1.0	-	0	1127	200	OK	-	-	(empty)	-	-	-	-	-	-	FW6shK2lLlkydbGMA7	-	text/plain
+1788336568.703589	Csavjm1lD6a7AQGvbb	127.0.0.1	43592	127.0.0.1	8000	1	GET	127.0.0.1:8000	/service/ping	-	1.0	UniDetect-Benign-Client/1.0	-	0	4	200	OK	-	-	(empty)	-	-	-	-	-	-	FfL9zy3yeBNqoEeqt4	-	-
+1788336568.701785	CW3hvU10ggQZaXttg5	127.0.0.1	45422	127.0.0.1	8080	1	GET	127.0.0.1:8080	/static/app.bundle.js	-	1.0	UniDetect-Benign-Client/1.0	-	0	64000	200	OK	-	-	(empty)	-	-	-	-	-	-	FowJgv1f7LmGNq01t6	-	text/plain
+#close	2026-09-02-08-09-34

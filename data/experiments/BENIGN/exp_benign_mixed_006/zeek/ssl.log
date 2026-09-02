@@ -1,0 +1,15 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	ssl
+#open	2026-09-02-08-09-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	version	cipher	curve	server_name	resumed	last_alert	next_protocol	established	ssl_history	cert_chain_fps	client_cert_chain_fps	sni_matches_cert
+#types	time	string	addr	port	addr	port	string	string	string	string	bool	string	string	bool	string	vector[string]	vector[string]	bool
+1788336565.189905	CqT6gi13Q0qG7XY0jl	127.0.0.1	47934	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	api.storage.local	F	-	-	T	CsiI	-	-	-
+1788336568.708317	Cu0ymBG6HUoKrth37	127.0.0.1	47950	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	portal.service.local	F	-	-	T	CsiI	-	-	-
+1788336568.708370	C7CERS2XDqxrUvy7i6	127.0.0.1	47962	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	secure.campus.internal	F	-	-	T	CsiI	-	-	-
+1788336570.219692	CLGEXE3ZjuMkYAWv33	127.0.0.1	47972	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	secure.campus.internal	F	-	-	T	CsiI	-	-	-
+1788336570.329785	CrpfxR1XqTdim6MDti	127.0.0.1	47974	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	portal.service.local	F	-	-	T	CsiI	-	-	-
+1788336570.440228	CqZRJb1yUFrpEnUl56	127.0.0.1	47984	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	api.storage.local	F	-	-	T	CsiI	-	-	-
+#close	2026-09-02-08-09-34

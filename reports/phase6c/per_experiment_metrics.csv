@@ -1,0 +1,7 @@
+experiment_id,class_name,test_flows,correct_predictions,incorrect_predictions,accuracy,mean_confidence,correct_confidence,incorrect_confidence
+exp_benign_periodic_007,BENIGN,63,63,0,1.0,0.9482,0.9482,0.0
+exp_ddos_udp_002,DDOS,151,116,35,0.7682,0.8543,0.926,0.6165
+exp_recon_001,RECON,18,10,8,0.5556,0.8231,0.8078,0.8423
+exp_slow_http_001,SLOW_HTTP,15,15,0,1.0,0.9312,0.9312,0.0
+exp_dns_tunnel_001,DNS_TUNNEL,16,8,8,0.5,0.8931,0.9474,0.8388
+exp_c2_beacon_001,C2_BEACON,15,15,0,1.0,0.9472,0.9472,0.0

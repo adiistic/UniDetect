@@ -1,0 +1,44 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	http
+#open	2026-09-02-09-30-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	trans_depth	method	host	uri	referrer	version	user_agent	origin	request_body_len	response_body_len	status_code	status_msg	info_code	info_msg	tags	username	password	proxied	orig_fuids	orig_filenames	orig_mime_types	resp_fuids	resp_filenames	resp_mime_types
+#types	time	string	addr	port	addr	port	count	string	string	string	string	string	string	string	count	count	count	string	count	string	set[enum]	string	string	set[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]	vector[string]
+1788341408.393724	CKrmsV2WDQfBY203Z3	127.0.0.1	34332	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FBz7qj1rAZaqKi6Nfc	-	text/json
+1788341408.694867	CAN4vv1GAOJueNX66a	127.0.0.1	34342	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FDimpU3jBnmDSDK7Ma	-	text/json
+1788341408.995693	CeLuhtuWxKfBUHuuc	127.0.0.1	34354	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FejpnR2AI3TXaUdOy7	-	text/json
+1788341409.296837	Chw58ZH9DAmWOOCyd	127.0.0.1	34366	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FB4vx7SEegp0ivNQ1	-	text/json
+1788341409.597820	CXNeFD20yAX8Zcx21g	127.0.0.1	34372	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	Ferj1h3HzHiDCKZNki	-	text/json
+1788341409.898984	C8tXgr3F2FHGB3KMl5	127.0.0.1	34380	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FYTWtO38QsGmwifB7c	-	text/json
+1788341410.199952	CKfakhKaPpj6TT6Rf	127.0.0.1	34388	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FzCt9i1Vhl0qYKkdke	-	text/json
+1788341410.501762	CLeRgv1bEMUFLNJehb	127.0.0.1	34404	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FytsCO19hh1d65jUl4	-	text/json
+1788341410.803137	CKN2nm4FBJMl6cRkOc	127.0.0.1	34418	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FgL1PqaDAwZ7Mdk34	-	text/json
+1788341411.104323	CHgqoP1pqHKZmemTme	127.0.0.1	34432	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FHrgRt1qe8tP1pnuCk	-	text/json
+1788341411.406068	CWAJhC4VIFAsFSEYvl	127.0.0.1	34448	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FML5YM3qtde1JPOj2j	-	text/json
+1788341411.706918	Cut3iI294FrVWkkD7e	127.0.0.1	34454	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FNnKJA1y1Uh23nZKX1	-	text/json
+1788341412.007829	CqCO1O1ZuJmFtvi256	127.0.0.1	34456	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FDX7BR3cg6pdBEj4kc	-	text/json
+1788341412.308783	Cq4PlBKqLu42Z3s1l	127.0.0.1	34466	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FMG657497vQ6Fc1jRj	-	text/json
+1788341412.609531	CFyYxd10ad9VC8lE3e	127.0.0.1	34472	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FAWeMhDe9AAZYcEzc	-	text/json
+1788341412.910603	CbCT5Q2X3FaKT9uJV9	127.0.0.1	37302	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1012	200	OK	-	-	(empty)	-	-	-	-	-	-	FDsVRC1jwWBJyMojd7	-	text/plain
+1788341413.398484	CAzbiT2y5DORm3WWAj	127.0.0.1	37316	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	58	48	200	OK	-	-	(empty)	-	-	-	FhyNsd1UYVgm37Budd	-	text/json	FXnUyo3Mu9qbCiHmj2	-	text/json
+1788341413.827907	C3CZqq3TKKWGcoxCKa	127.0.0.1	37328	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1013	200	OK	-	-	(empty)	-	-	-	-	-	-	Fs4OVY3kYOi1hxpH6g	-	text/plain
+1788341414.243016	CMZRIP2VU04XdKcMwh	127.0.0.1	37330	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	58	48	200	OK	-	-	(empty)	-	-	-	Ffy9De1Yt1WA0cRRsg	-	text/json	FbuQtT2ivGyU3F5KNb	-	text/json
+1788341414.708991	CQ0cvn2vM2HpUcwbLi	127.0.0.1	32810	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1013	200	OK	-	-	(empty)	-	-	-	-	-	-	FmdeoSibwOk8P3REg	-	text/plain
+1788341415.134682	CMChaf3nDz7pRnnJIg	127.0.0.1	32812	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	58	48	200	OK	-	-	(empty)	-	-	-	F93pKW2Eoal46CpWVg	-	text/json	FA5ohk4BSWu5ymakgg	-	text/json
+1788341415.563639	CRd89i4VyBHCAewDs7	127.0.0.1	32814	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1013	200	OK	-	-	(empty)	-	-	-	-	-	-	FdFZFq34rND6rhTAff	-	text/plain
+1788341416.005865	CDuA6w8j5H5RfdnJ4	127.0.0.1	32820	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	58	48	200	OK	-	-	(empty)	-	-	-	FaT0Ov4CYQzvJm4KHk	-	text/json	F7Dqod2M0vqdhV6pb4	-	text/json
+1788341416.431184	CsKXYjZyEr6cq1lg	127.0.0.1	32836	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1013	200	OK	-	-	(empty)	-	-	-	-	-	-	FCN6tz1YY5R4Z7YSyk	-	text/plain
+1788341416.851795	CX39iv1MgWnCP4KeLb	127.0.0.1	32848	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	58	48	200	OK	-	-	(empty)	-	-	-	FpvLbW1RSfmAdxgiq3	-	text/json	FHZPTz4s1abVgat5Mg	-	text/json
+1788341417.342485	C8pZuh8ADSWkMpFP4	127.0.0.1	32856	127.0.0.1	8000	1	GET	127.0.0.1:8000	/metrics	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	1013	200	OK	-	-	(empty)	-	-	-	-	-	-	FMCKFa1pgowlcUKBcj	-	text/plain
+1788341417.778708	CEmylB3xIJh7uVMQ2b	127.0.0.1	32860	127.0.0.1	8000	1	POST	127.0.0.1:8000	/telemetry/push	-	1.0	-	-	59	48	200	OK	-	-	(empty)	-	-	-	FucqH93c3TwRhZUR0b	-	text/json	FOtXCu4rDqvFOeHoH2	-	text/json
+1788341428.329933	CmobhpJJE8DHPWUp2	127.0.0.1	53036	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	F28j7Cdgr7u1Y5RK8	-	text/json
+1788341428.630908	C8LPTj2BC0G54TuPQc	127.0.0.1	53048	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	Fs60Ed4TEcEAssocR7	-	text/json
+1788341428.931804	Crart24lR0RYU9jk1	127.0.0.1	53058	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FoKCc91Y9R9bqOFGbh	-	text/json
+1788341429.232593	C6lXMO3YBsJf20AJA	127.0.0.1	53070	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FGU0dO38yAYnYJmZVk	-	text/json
+1788341429.533368	CCKwun1mTlFaMDJ9Q5	127.0.0.1	53084	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/reports/summary	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	7744	200	OK	-	-	(empty)	-	-	-	-	-	-	FDFaA93pDr3ugYqXYd	-	text/json
+1788341429.834447	CCOxHFEPksKt9Tim3	127.0.0.1	53088	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FU3err40O5hvxluJj	-	text/json
+1788341430.135583	CKuqQB3YyCmDdUdR95	127.0.0.1	53092	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FZaa6G4JCUVxo7NiXk	-	text/json
+1788341430.436713	CJfiI61xNpMkeVdGQ2	127.0.0.1	53104	127.0.0.1	8080	1	GET	127.0.0.1:8080	/api/v1/health	-	1.0	UniDetect-Periodic-Monitor/1.0	-	0	66	200	OK	-	-	(empty)	-	-	-	-	-	-	FzLeBR1kbO5ZF5ik83	-	text/json
+#close	2026-09-02-09-30-34

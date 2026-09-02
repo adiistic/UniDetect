@@ -1,0 +1,35 @@
+{
+  "health_status": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_version": "unidetect-hgb-calibrated-v1.0.0",
+    "schema_version": "1.0.0"
+  },
+  "total_alerts_stored": 424,
+  "rest_metrics": {
+    "total_flows": 424,
+    "total_predictions": 424,
+    "total_threats": 348,
+    "benign_count": 74,
+    "analyst_review_count": 2,
+    "per_class_counts": {
+      "BENIGN": 75,
+      "DDOS": 155,
+      "RECON": 49,
+      "SLOW_HTTP": 51,
+      "DNS_TUNNEL": 44,
+      "C2_BEACON": 50
+    },
+    "average_inference_latency_ms": 21.12,
+    "p95_latency_ms": 23.343
+  },
+  "rest_latency_sample_ms": 5.7,
+  "active_classes": [
+    "BENIGN",
+    "DDOS",
+    "RECON",
+    "DNS_TUNNEL",
+    "C2_BEACON",
+    "SLOW_HTTP"
+  ]
+}

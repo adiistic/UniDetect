@@ -1,0 +1,58 @@
+{
+  "experiment_id": "exp_benign_mixed_006",
+  "label": "BENIGN",
+  "label_id": 0,
+  "traffic_generator": "mixed_realistic_application_suite (HTTP + HTTPS/TLS + UDP DNS + Framed TCP)",
+  "description": "Diverse mixed realistic application traffic expanding benign baseline across multiple ports, protocols, durations, payload sizes, and bursty patterns in isolated local lab",
+  "start_time": 1788336564.0253973,
+  "end_time": 1788336570.6424809,
+  "duration_seconds": 6.617,
+  "source_endpoints": [
+    "127.0.0.1"
+  ],
+  "destination_endpoints": [
+    "127.0.0.1:8080",
+    "127.0.0.1:8000",
+    "127.0.0.1:443",
+    "127.0.0.1:5353",
+    "127.0.0.1:9090"
+  ],
+  "capture_file": "data/experiments/BENIGN/exp_benign_mixed_006/pcap/capture.pcap",
+  "capture_size_bytes": 328747,
+  "capture_packet_count": 305,
+  "zeek_log_directory": "data/experiments/BENIGN/exp_benign_mixed_006/zeek",
+  "feature_file": "data/experiments/BENIGN/exp_benign_mixed_006/features/features.jsonl",
+  "total_flows": 28,
+  "total_features": 78,
+  "total_missed_bytes": 0.0,
+  "protocol_distribution": {
+    "tcp": 23,
+    "udp": 5
+  },
+  "port_distribution": {
+    "8080": 7,
+    "8000": 6,
+    "9090": 4,
+    "443": 6,
+    "5353": 5
+  },
+  "ssl_context_flows": 6,
+  "dns_context_flows": 5,
+  "flow_duration_range_seconds": [
+    7.7e-05,
+    2.802742
+  ],
+  "orig_bytes_range": [
+    21.0,
+    31637.0
+  ],
+  "resp_bytes_range": [
+    26.0,
+    64172.0
+  ],
+  "weird_events": [],
+  "label_distribution": {
+    "BENIGN": 28
+  },
+  "created_at": "2026-09-02T08:09:34Z"
+}

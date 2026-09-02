@@ -137,9 +137,9 @@ UniDetect adheres strictly to a **passive-only** architectural model:
 
 ## 🧪 Experiments & Dataset Inventory
 
-The laboratory generation suite has produced **564 validated candidate feature vectors** across 6 distinct traffic classes, with full artifact preservation (PCAP, Zeek logs, JSONL vectors, `metadata.json`, and `AUDIT.md`).
+The laboratory generation suite has produced **655 validated candidate feature vectors** across 6 distinct traffic classes, with full artifact preservation (PCAP, Zeek logs, JSONL vectors, `metadata.json`, and `AUDIT.md`).
 
-### Experiment Summary Matrix
+### Authoritative Retained Experiment Matrix (12 Experiments)
 
 | Class | Experiment ID | Traffic Generator / Description | Validated Vectors | PCAP Size | Associated Zeek Logs | Key Feature Separators |
 |---|---|---|---|---|---|---|
@@ -147,14 +147,17 @@ The laboratory generation suite has produced **564 validated candidate feature v
 | **BENIGN** | `exp_benign_multi_003` | Multi-protocol web browsing & downloads | 15 | 3.97 MB | `conn.log`, `dns.log`, `files.log`, `http.log` | Standard HTTP/DNS interactions, realistic entropy |
 | **BENIGN** | `exp_benign_dns_004` | Diverse realistic DNS queries (A, TXT, NX) | 20 | 4.7 KB | `conn.log`, `dns.log` | Natural lexical ratios, normal subdomain depths |
 | **BENIGN** | `exp_benign_tls_005` | Modern TLS 1.2/1.3 encrypted HTTPS sessions | 8 | 141.7 KB | `conn.log`, `ssl.log` | Valid SNI, standard entropy, valid certificates |
+| **BENIGN** | `exp_benign_mixed_006` | Mixed multi-service web, chunked assets, burst-idle | 28 | 328.7 KB | `conn.log`, `dns.log`, `http.log`, `ssl.log` | Anti-shortcut baseline: multi-port, multi-duration, burst-idle |
+| **BENIGN** | `exp_benign_periodic_007`| Legitimate periodic health checks, scrapes, DNS | 63 | 122.9 KB | `conn.log`, `dns.log`, `http.log`, `ssl.log` | Hard-negative periodic baseline ($CV \approx 0.17$, 5 ports) |
 | **DDOS** | `exp_ddos_syn_001` | TCP SYN flood attack (unanswered SYNs) | 150 | 21.0 KB | `conn.log`, `reporter.log` | `conn_state_is_S0=1.0`, `orig_bytes=0`, high flow rate |
 | **DDOS** | `exp_ddos_udp_002` | High-rate UDP datagram flood | 151 | 162.6 KB | `conn.log` | `proto_is_udp=1.0`, high inbound flow rate, fixed payloads |
 | **RECON** | `exp_recon_001` | Multi-host / multi-port TCP SYN port scan | 59 | 17.4 KB | `conn.log`, `dns.log`, `http.log` | High `win_src_unique_dst_ports_60s`, high failed ratio |
 | **SLOW_HTTP** | `exp_slow_http_001` | Slowloris / Slow HTTP POST connection hold | 50 | 70.2 KB | `conn.log`, `files.log`, `http.log` | Extended `flow_duration` (avg 3.2s vs <0.01s), low byte rate |
 | **DNS_TUNNEL** | `exp_dns_tunnel_001` | Base32/Hex encoded DNS data exfiltration | 52 | 13.8 KB | `conn.log`, `dns.log` | High `dns_query_entropy` (3.9+), high `dns_subdomain_depth` |
 | **C2_BEACON** | `exp_c2_beacon_001` | Periodic HTTP Command & Control heartbeats | 50 | 81.8 KB | `conn.log`, `http.log`, `files.log` | Low inter-arrival jitter (`win_pair_delta_t_cv = 0.137`), uniform size |
+| **TOTAL** | **12 Experiments** | **Authoritative Corpus Total** | **655** | **~75.9 MB** | — | **100% Zero-Loss Capture (0.0 missed bytes)** |
 
-> **Note on Excluded Experiments**: `exp_benign_iperf_001` (5 vectors) was audited and explicitly excluded from ML training due to artificial loopback packet drop anomalies (>69 GB virtual buffer loss) in WSL2, replaced cleanly by `exp_benign_iperf_002`.
+> **Comprehensive Corpus Audit**: See [`FINAL_PHASE5_AUDIT.md`](file:///c:/Users/GOURAV%20GABA/Downloads/unidetectml/FINAL_PHASE5_AUDIT.md) for full forensic validation, causal temporal checks, and Phase 6 train/test split guidelines.
 
 ---
 
@@ -167,16 +170,16 @@ Feature Comparison Across Attack Modalities vs Benign:
 ------------------------------------------------------------------------------------------------------------------------
 Feature Name                  | BENIGN (Avg)   | DDOS SYN (Avg) | DDOS UDP (Avg) | RECON (Avg)    | SLOW_HTTP | C2_BEACON
 ------------------------------------------------------------------------------------------------------------------------
-flow_duration                 | 0.001 s        | 0.000 s        | 0.000 s        | 0.103 s        | 3.212 s   | 0.001 s
-total_bytes                   | 18,475 B       | 0 B            | 1,024 B        | 53 B           | 326 B     | 471 B
-bytes_per_packet              | 1,474 B        | 0 B            | 1,024 B        | 8.3 B          | 25.2 B    | 33.6 B
-proto_is_tcp                  | 0.41           | 1.00           | 0.00           | 1.00           | 1.00      | 1.00
-proto_is_udp                  | 0.59           | 0.00           | 1.00           | 0.00           | 0.00      | 0.00
-conn_state_is_SF              | 0.89           | 0.00           | 1.00           | 0.35           | 0.90      | 1.00
+flow_duration                 | 0.052 s        | 0.000 s        | 0.000 s        | 0.103 s        | 3.212 s   | 0.001 s
+total_bytes                   | 3,812 B        | 0 B            | 1,024 B        | 53 B           | 326 B     | 471 B
+bytes_per_packet              | 524 B          | 0 B            | 1,024 B        | 8.3 B          | 25.2 B    | 33.6 B
+proto_is_tcp                  | 0.82           | 1.00           | 0.00           | 1.00           | 1.00      | 1.00
+proto_is_udp                  | 0.18           | 0.00           | 1.00           | 0.00           | 0.00      | 0.00
+conn_state_is_SF              | 0.94           | 0.00           | 1.00           | 0.35           | 0.90      | 1.00
 conn_state_is_S0              | 0.00           | 1.00           | 0.00           | 0.40           | 0.00      | 0.00
-win_src_flow_rate_10s         | 0.45 flows/s   | 7.55 flows/s   | 7.55 flows/s   | 2.46 flows/s   | 2.55 f/s  | 1.82 f/s
-win_pair_delta_t_cv (Jitter)  | 0.126 (varies) | 0.883          | 0.000          | 0.704          | 2.379     | 0.137 (strict)
-dns_query_entropy             | 2.06           | 0.00           | 0.00           | 0.00           | 0.00      | 0.00 (tunnel=3.9+)
+win_src_flow_rate_10s         | 1.48 flows/s   | 7.55 flows/s   | 7.55 flows/s   | 2.46 flows/s   | 2.55 f/s  | 1.82 f/s
+win_pair_delta_t_cv (Jitter)  | 0.170 (varies) | 0.883          | 0.000          | 0.704          | 2.379     | 0.137 (strict)
+dns_query_entropy             | 2.15           | 0.00           | 0.00           | 0.00           | 0.00      | 0.00 (tunnel=3.9+)
 ```
 
 ---
@@ -188,8 +191,8 @@ The codebase features an exhaustive automated test suite running with Python `un
 ```bash
 python -m unittest discover -s tests
 ```
-- **Total Tests**: **63 tests** across 8 test suites.
-- **Pass Rate**: **100% (63/63 passing)**.
+- **Total Tests**: **113 tests** across 12 test suites.
+- **Pass Rate**: **100% (113/113 passing)**.
 - **Coverage Areas**:
   - `test_checkpoint.py`: Atomic state persistence, corruption recovery, concurrent read/write.
   - `test_flow_record.py`: Schema validation, normalization edge cases, missing field imputation.
@@ -199,6 +202,10 @@ python -m unittest discover -s tests
   - `test_zeek_reader.py`: Parsing of `conn`, `dns`, `weird`, `ssl`, `quic`, and `ntp` logs.
   - `test_feature_extractor.py`: Flow-level metric extractions.
   - `test_feature_engineering_phase4.py`: Strict validation of 78D vector schema, Shannon entropy calculations, sliding window computations, cross-log correlation, and zero NaN/Inf assertions.
+  - `test_master_dataset.py`: Master dataset CSV/JSONL row count (655 rows), dimensionality (78D), metadata structure, label agreement, and schema alignment.
+  - `test_phase6e_inference.py`: Verification of serialized artifacts (`model.joblib`, `model_metadata.json`, `feature_contract.json`, `decision_policy.json`), frozen 78D feature contract, selective classification abstention policy ($\theta=0.40$), and input validation assertions.
+  - `test_phase7_streaming.py`: End-to-end real-time inference streaming pipeline, causal sliding window tracking, standardized `AlertEvent` schema, fail-safe error handling, and offline experiment replay verification.
+  - `test_phase8_backend.py`: FastAPI REST API routes (`/health`, `/api/v1/status`, `/api/v1/alerts`, `/api/v1/metrics`, `/api/v1/model`), WebSocket streaming (`/ws/alerts`), query validation, bounded in-memory `AlertStore` ring buffer, and React SOC dashboard static HTML serving.
 
 ---
 
@@ -210,8 +217,12 @@ python -m unittest discover -s tests
 | **Phase 2** | Batch Zeek Log Ingestion & FlowRecord DTO | ✅ Completed | Implemented `zeek_reader.py`, `flow_record.py` |
 | **Phase 3** | Incremental live log reader, watcher, checkpointing | ✅ Completed | Implemented `checkpoint.py`, `incremental_reader.py`, `watcher.py`, `live_pipeline.py` |
 | **Phase 4** | 78-D Feature Engineering & Multi-Log Correlator | ✅ Completed | Implemented `schema.py`, `math_utils.py`, `correlator.py`, `window_aggregator.py`, `vector_assembler.py` |
-| **Phase 5** | Multi-Class Traffic Generation & Lab Experiments | ✅ Completed (6/9 Classes) | BENIGN, DDOS (SYN/UDP), RECON, SLOW_HTTP, DNS_TUNNEL, C2_BEACON generated & validated (564 vectors) |
-| **Phase 6** | Remaining Traffic Classes (`DGA`, `EXFILTRATION`, `ENCRYPTED_SESSION`) | ⏳ Upcoming | Generate targeted datasets for domain generation algorithms and raw exfiltration |
-| **Phase 7** | Machine Learning Training & Model Selection | ⏳ Upcoming | Train LightGBM / XGBoost / Random Forest baseline multi-class classifier on 78D matrix |
-| **Phase 8** | Real-Time Inference & Alert Streaming Pipeline | ⏳ Upcoming | Connect `LiveZeekPipeline` to real-time ML inference engine and alert dispatcher |
-| **Phase 9** | FastAPI Backend & Interactive Web Dashboard | ⏳ Upcoming | Build REST API endpoints and dashboard UI for security analysts |
+| **Phase 5** | Multi-Class Traffic Generation & Final Corpus Audit | ✅ Completed | 12 retained experiments, 655 vectors, 100% zero-loss capture verified in `FINAL_PHASE5_AUDIT.md` |
+| **Phase 6A** | Master Dataset Assembly & Forensic Profiling | ✅ Completed | Built `master_dataset.csv`, `master_dataset.jsonl`, `DATASET_PROFILE.md`, zero defects |
+| **Phase 6B** | Baseline Machine Learning Model Benchmarking | ✅ Completed | Leakage-controlled evaluation across 5 models, HistGradientBoosting achieved 0.7941 Macro F1 (`PHASE6B_BASELINE_REPORT.md`) |
+| **Phase 6C** | In-Depth Model Evaluation, Error & Robustness Analysis | ✅ Completed | Validated cross-modality DDoS transfer, benign hard-negative resistance, seed stability ($\sigma < 0.004$) (`PHASE6C_ROBUST_EVALUATION_REPORT.md`) |
+| **Phase 6D** | Model Refinement, Calibration & Threshold Analysis | ✅ Completed | Evaluated sensitivity, sigmoid probability calibration (reduced log loss $34.3\%$), abstention trade-offs (`PHASE6D_MODEL_REFINEMENT_REPORT.md`) |
+| **Phase 6E** | Final Model Selection, Packaging & Artifact Serialization | ✅ Completed | Frozen 78D contract, serialized calibrated model bundle under `models/phase6e/`, standalone inference engine (`src/inference/`), 79/79 passing tests (`PHASE6E_FINAL_MODEL_SELECTION_REPORT.md`) |
+| **Phase 7** | Real-Time Inference & Alert Streaming Pipeline | ✅ Completed | Connected `LiveZeekPipeline` to frozen ML model, standardized `AlertEvent` schema, full 12-experiment replay benchmark, 94/94 passing tests (`PHASE7_REALTIME_INFERENCE_REPORT.md`) |
+| **Phase 8** | FastAPI Backend & API Layer | ✅ Completed | Implemented REST endpoints, WebSocket `/ws/alerts`, bounded `AlertStore`, OpenAPI documentation, 112/112 passing tests (`PHASE8_FASTAPI_BACKEND_REPORT.md`) |
+| **Phase 9** | React/TypeScript SOC Dashboard Frontend | ✅ Completed | Built React/TypeScript/Vite SOC dashboard, probability bar visualization, forensic modal, model specs drawer, 113/113 passing tests (`PHASE9_SOC_DASHBOARD_REPORT.md`) |

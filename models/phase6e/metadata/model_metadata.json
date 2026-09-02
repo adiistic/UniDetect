@@ -1,0 +1,258 @@
+{
+  "model_name": "UniDetect Passive Threat Classifier",
+  "model_version": "unidetect-hgb-calibrated-v1.0.0",
+  "schema_version": "1.0.0",
+  "creation_timestamp": "2026-09-02T10:08:44Z",
+  "architecture": {
+    "base_estimator": "HistGradientBoostingClassifier",
+    "calibration_wrapper": "CalibratedClassifierCV(method='sigmoid', cv=3)",
+    "hyperparameters": {
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.0,
+      "class_weight": "balanced",
+      "random_state": 42
+    }
+  },
+  "feature_specification": {
+    "num_features": 78,
+    "feature_columns": [
+      "flow_duration",
+      "orig_bytes",
+      "resp_bytes",
+      "total_bytes",
+      "orig_packets",
+      "resp_packets",
+      "total_packets",
+      "bytes_per_packet",
+      "orig_bytes_ratio",
+      "orig_packets_ratio",
+      "bytes_asymmetry_ratio",
+      "missed_bytes",
+      "is_well_known_dst_port",
+      "is_registered_dst_port",
+      "is_dynamic_dst_port",
+      "is_src_private_ip",
+      "is_dst_private_ip",
+      "proto_is_tcp",
+      "proto_is_udp",
+      "proto_is_icmp",
+      "conn_state_is_SF",
+      "conn_state_is_S0",
+      "conn_state_is_REJ",
+      "conn_state_is_RSTO",
+      "history_len",
+      "history_has_syn",
+      "history_has_reset",
+      "has_dns_context",
+      "dns_query_len",
+      "dns_query_entropy",
+      "dns_subdomain_depth",
+      "dns_max_label_len",
+      "dns_numeric_ratio",
+      "dns_vowel_ratio",
+      "dns_qtype_is_A",
+      "dns_qtype_is_TXT",
+      "dns_qtype_is_NULL",
+      "dns_is_nxdomain",
+      "dns_answer_count",
+      "dns_rtt",
+      "has_quic_context",
+      "quic_sni_len",
+      "quic_sni_entropy",
+      "quic_dcid_len",
+      "has_weird_anomaly",
+      "weird_anomaly_count_flow",
+      "weird_is_bad_syn_ack",
+      "weird_is_bad_http",
+      "weird_notice_flag",
+      "has_ssl_context",
+      "ssl_sni_len",
+      "ssl_sni_entropy",
+      "ssl_is_outdated_version",
+      "ssl_is_self_signed",
+      "ssl_has_ja3_fingerprint",
+      "ssl_resumed_flag",
+      "win_src_flow_count_60s",
+      "win_src_flow_rate_10s",
+      "win_src_unique_dst_ips_60s",
+      "win_src_unique_dst_ports_60s",
+      "win_src_failed_conn_ratio_60s",
+      "win_src_s0_syn_ratio_60s",
+      "win_src_total_orig_bytes_300s",
+      "win_src_outbound_byte_rate_60s",
+      "win_src_dns_query_count_60s",
+      "win_src_dns_nxdomain_ratio_60s",
+      "win_src_dns_unique_domains_60s",
+      "win_src_weird_count_60s",
+      "win_dst_inbound_flow_rate_10s",
+      "win_dst_unique_sources_60s",
+      "win_dst_s0_syn_ratio_10s",
+      "win_dst_avg_bytes_per_flow_60s",
+      "win_pair_flow_count_300s",
+      "win_pair_delta_t_mean",
+      "win_pair_delta_t_std",
+      "win_pair_delta_t_cv",
+      "win_pair_orig_bytes_std",
+      "win_pair_total_orig_bytes_300s"
+    ],
+    "data_type": "float64"
+  },
+  "target_specification": {
+    "classes": [
+      "BENIGN",
+      "DDOS",
+      "RECON",
+      "DNS_TUNNEL",
+      "C2_BEACON",
+      "SLOW_HTTP"
+    ],
+    "label_ids": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      7
+    ],
+    "threat_classes_enum": [
+      "BENIGN",
+      "DDOS",
+      "RECON",
+      "DGA",
+      "DNS_TUNNEL",
+      "C2_BEACON",
+      "ENCRYPTED_SESSION",
+      "SLOW_HTTP",
+      "EXFILTRATION"
+    ]
+  },
+  "training_provenance": {
+    "source_dataset": "data/master/master_dataset.csv",
+    "total_corpus_rows": 655,
+    "training_rows_count": 377,
+    "test_rows_count": 278,
+    "split_specification": {
+      "exp_benign_iperf_002": {
+        "class": "BENIGN",
+        "split": "train",
+        "count": 9
+      },
+      "exp_benign_multi_003": {
+        "class": "BENIGN",
+        "split": "train",
+        "count": 15
+      },
+      "exp_benign_dns_004": {
+        "class": "BENIGN",
+        "split": "train",
+        "count": 20
+      },
+      "exp_benign_tls_005": {
+        "class": "BENIGN",
+        "split": "train",
+        "count": 8
+      },
+      "exp_benign_mixed_006": {
+        "class": "BENIGN",
+        "split": "train",
+        "count": 28
+      },
+      "exp_benign_periodic_007": {
+        "class": "BENIGN",
+        "split": "test",
+        "count": 63
+      },
+      "exp_ddos_syn_001": {
+        "class": "DDOS",
+        "split": "train",
+        "count": 150
+      },
+      "exp_ddos_udp_002": {
+        "class": "DDOS",
+        "split": "test",
+        "count": 151
+      },
+      "exp_recon_001": {
+        "class": "RECON",
+        "split": "chronological_70_30",
+        "train_count": 41,
+        "test_count": 18
+      },
+      "exp_slow_http_001": {
+        "class": "SLOW_HTTP",
+        "split": "chronological_70_30",
+        "train_count": 35,
+        "test_count": 15
+      },
+      "exp_dns_tunnel_001": {
+        "class": "DNS_TUNNEL",
+        "split": "chronological_70_30",
+        "train_count": 36,
+        "test_count": 16
+      },
+      "exp_c2_beacon_001": {
+        "class": "C2_BEACON",
+        "split": "chronological_70_30",
+        "train_count": 35,
+        "test_count": 15
+      }
+    }
+  },
+  "evaluation_metrics": {
+    "macro_precision": 0.8938,
+    "macro_recall": 0.7854,
+    "macro_f1": 0.8021,
+    "balanced_accuracy": 0.7854,
+    "log_loss": 0.9961,
+    "per_class_metrics": {
+      "BENIGN": {
+        "precision": 0.578,
+        "recall": 1.0,
+        "f1_score": 0.7326,
+        "support": 63
+      },
+      "DDOS": {
+        "precision": 0.9587,
+        "recall": 0.7682,
+        "f1_score": 0.8529,
+        "support": 151
+      },
+      "RECON": {
+        "precision": 0.8889,
+        "recall": 0.4444,
+        "f1_score": 0.5926,
+        "support": 18
+      },
+      "DNS_TUNNEL": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1_score": 0.6667,
+        "support": 16
+      },
+      "C2_BEACON": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 15
+      },
+      "SLOW_HTTP": {
+        "precision": 0.9375,
+        "recall": 1.0,
+        "f1_score": 0.9677,
+        "support": 15
+      }
+    }
+  },
+  "software_dependencies": {
+    "python": "3.14.2",
+    "scikit_learn": "joblib",
+    "numpy": "2.4.1",
+    "pandas": "3.0.0"
+  },
+  "operational_thresholds": {
+    "abstain_confidence_threshold": 0.4,
+    "recon_threshold": 0.35
+  }
+}

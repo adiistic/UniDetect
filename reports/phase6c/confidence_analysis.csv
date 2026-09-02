@@ -1,0 +1,7 @@
+class_name,total_test_count,correct_count,incorrect_count,overall_confidence,correct_confidence,incorrect_confidence
+BENIGN,63,63,0,0.9482,0.9482,0.0
+DDOS,151,116,35,0.8543,0.926,0.6165
+RECON,18,10,8,0.8231,0.8078,0.8423
+DNS_TUNNEL,16,8,8,0.8931,0.9474,0.8388
+C2_BEACON,15,15,0,0.9472,0.9472,0.0
+SLOW_HTTP,15,15,0,0.9312,0.9312,0.0

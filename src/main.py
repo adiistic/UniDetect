@@ -3,10 +3,12 @@ UniDetect Main Entry Point
 
 UniDetect is a university cybersecurity prototype for passive network traffic analysis.
 It ingests Zeek log files from disk, extracts behavioral features, and performs
-offline and near-real-time passive analysis without interacting directly with live network traffic.
+offline, replay, and near-real-time passive threat detection using frozen ML models,
+with an interactive SOC dashboard and FastAPI streaming interface.
 """
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -16,20 +18,37 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from src.features.extractor import extract_all_features
+from src.inference.pipeline import RealtimeInferencePipeline
 from src.ingestion.live_pipeline import LiveZeekPipeline
 from src.ingestion.zeek_reader import load_zeek_logs, SUPPORTED_LOG_TYPES
 
 
 def main() -> None:
-    """CLI entry point for UniDetect passive log analysis."""
+    """CLI entry point for UniDetect passive log analysis, ML threat detection, and SOC dashboard."""
     parser = argparse.ArgumentParser(
-        description="UniDetect - Passive Network Traffic Analysis"
+        description="UniDetect - Passive Network Traffic Analysis & SOC Dashboard"
+    )
+    parser.add_argument(
+        "--dashboard",
+        action="store_true",
+        help="Launch the interactive SOC dashboard and FastAPI backend server on http://127.0.0.1:8000",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="Port to bind the dashboard web server (default: 8000)",
     )
     parser.add_argument(
         "--log-dir",
         type=str,
         default="data/zeek_logs",
         help="Path to directory containing offline Zeek log files (default: data/zeek_logs)",
+    )
+    parser.add_argument(
+        "--predict",
+        action="store_true",
+        help="Run real-time ML threat detection across flows in the target log directory",
     )
     parser.add_argument(
         "--show-features",
@@ -40,39 +59,74 @@ def main() -> None:
         "--live-log-dir",
         type=str,
         default=None,
-        help="Path to an active Zeek log directory to poll incrementally (demonstration mode; reads existing log files from disk)",
+        help="Path to an active Zeek log directory to poll incrementally with live ML detection",
     )
 
     args = parser.parse_args()
 
-    # Controlled Demonstration Mode for Live Zeek Log Directory
-    if args.live_log_dir:
-        live_dir = Path(args.live_log_dir)
-        print("UniDetect Passive Traffic Analysis (Live Log Directory Polling)")
-        print(f"Target Directory: {live_dir}")
-        print("------------------------------------------------------------------")
-
-        pipeline = LiveZeekPipeline(log_dir=live_dir)
-        results = pipeline.poll_once()
-        summary = results["summary"]
-
-        print(f"Newly observed flow records (conn.log):   {summary['flows_count']}")
-        print(f"Newly observed DNS records (dns.log):     {summary.get('dns_count', 0)}")
-        print(f"Newly observed weird records (weird.log): {summary.get('weird_count', 0)}")
-        print(f"Total newly observed records:            {summary['total_records']}")
-
-        if results["flows"]:
-            print("\nSample Newly Parsed FlowRecord:")
-            sample = results["flows"][0]
-            print(f"  UID:              {sample.uid}")
-            print(f"  Source:           {sample.source.ip}:{sample.source.port}")
-            print(f"  Destination:      {sample.destination.ip}:{sample.destination.port}")
-            print(f"  Protocol:         {sample.network.protocol} (Service: {sample.network.service or 'unknown'})")
-            print(f"  Bytes / Packets:  {sample.metrics.total_bytes} bytes / {sample.metrics.total_packets} packets")
-            print(f"  State:            {sample.connection_state}")
+    # 1. Interactive SOC Dashboard & Backend Web Server
+    if args.dashboard:
+        import uvicorn
+        print("=" * 80)
+        print("Launching UniDetect SOC Dashboard & FastAPI Streaming Backend")
+        print(f"  Dashboard UI:           http://127.0.0.1:{args.port}")
+        print(f"  REST API:               http://127.0.0.1:{args.port}/api/v1/alerts")
+        print(f"  WebSocket Stream:       ws://127.0.0.1:{args.port}/ws/alerts")
+        print(f"  Interactive OpenAPI:    http://127.0.0.1:{args.port}/docs")
+        print("=" * 80)
+        uvicorn.run("src.api.app:app", host="127.0.0.1", port=args.port, reload=False)
         return
 
-    # Standard Offline Batch Mode
+    # 2. Controlled Live / Replay ML Inference Mode
+    if args.predict or args.live_log_dir:
+        target_dir = Path(args.live_log_dir) if args.live_log_dir else Path(args.log_dir)
+        print("=" * 80)
+        print("UniDetect Passive Traffic Analysis & ML Threat Detection Pipeline")
+        print(f"Target Directory: {target_dir.resolve()}")
+        print("=" * 80)
+
+        pipeline = RealtimeInferencePipeline()
+
+        if args.live_log_dir:
+            print("[LIVE STREAMING MODE]")
+            live_pipe = LiveZeekPipeline(log_dir=target_dir)
+            
+            def alert_cb(alert):
+                tag = f"[{alert.decision}]"
+                status = f"THREAT: {alert.predicted_label}" if alert.is_threat else ("REVIEW" if alert.abstained else "BENIGN")
+                print(f"  {tag:<22} {status:<18} | {alert.source_ip}:{alert.source_port} -> {alert.destination_ip}:{alert.destination_port} ({alert.protocol}) | Conf: {alert.confidence:.2f} ({alert.processing_time_ms:.1f}ms)")
+
+            poll_fn = pipeline.attach_to_live_pipeline(live_pipe, alert_callback=alert_cb)
+            print("Executing incremental poll pass...")
+            alerts = poll_fn()
+            perf = pipeline.get_performance_summary()
+            print("\nLive Polling Summary:")
+            print(f"  Flows Processed:   {perf['total_flows_processed']}")
+            print(f"  Threats Detected:  {perf['threats_detected']}")
+            print(f"  Analyst Reviews:   {perf['abstained_reviews']}")
+            print(f"  Benign Flows:      {perf['benign_flows']}")
+            print(f"  Mean Latency:      {perf['mean_latency_ms']} ms/flow")
+            return
+
+        else:
+            print("[OFFLINE REPLAY MODE]")
+            alerts, perf = pipeline.replay_directory(target_dir)
+            print(f"\nReplay Execution Complete:")
+            print(f"  Flows Processed:   {perf['total_flows_processed']}")
+            print(f"  Threats Detected:  {perf['threats_detected']}")
+            print(f"  Analyst Reviews:   {perf['abstained_reviews']}")
+            print(f"  Benign Flows:      {perf['benign_flows']}")
+            print(f"  Mean Latency:      {perf['mean_latency_ms']} ms/flow")
+            print(f"  P95 Latency:       {perf['p95_latency_ms']} ms/flow")
+            print(f"  Throughput:        {perf['throughput_flows_per_sec']} flows/second")
+
+            if alerts:
+                print("\nSample Emitted Alert:")
+                sample = alerts[0]
+                print(json.dumps(sample.to_dict(), indent=2))
+            return
+
+    # 3. Standard Offline Batch Inspection Mode
     log_dir = Path(args.log_dir)
 
     print("UniDetect Passive Traffic Analysis")

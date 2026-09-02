@@ -1,0 +1,734 @@
+{
+  "timestamp": "2026-09-02T09:41:51Z",
+  "total_corpus_rows": 655,
+  "train_rows": 377,
+  "test_rows": 278,
+  "classes": [
+    "BENIGN",
+    "DDOS",
+    "RECON",
+    "DNS_TUNNEL",
+    "C2_BEACON",
+    "SLOW_HTTP"
+  ],
+  "split_manifest": {
+    "exp_benign_iperf_002": {
+      "class": "BENIGN",
+      "partition": "train_holdout",
+      "count": 9
+    },
+    "exp_benign_multi_003": {
+      "class": "BENIGN",
+      "partition": "train_holdout",
+      "count": 15
+    },
+    "exp_benign_dns_004": {
+      "class": "BENIGN",
+      "partition": "train_holdout",
+      "count": 20
+    },
+    "exp_benign_tls_005": {
+      "class": "BENIGN",
+      "partition": "train_holdout",
+      "count": 8
+    },
+    "exp_benign_mixed_006": {
+      "class": "BENIGN",
+      "partition": "train_holdout",
+      "count": 28
+    },
+    "exp_benign_periodic_007": {
+      "class": "BENIGN",
+      "partition": "test_holdout_unseen_experiment",
+      "count": 63
+    },
+    "exp_ddos_syn_001": {
+      "class": "DDOS",
+      "partition": "train_holdout",
+      "count": 150
+    },
+    "exp_ddos_udp_002": {
+      "class": "DDOS",
+      "partition": "test_holdout_unseen_modality",
+      "count": 151
+    },
+    "exp_recon_001": {
+      "class": "RECON",
+      "partition": "chronological_70_30",
+      "train_count": 41,
+      "test_count": 18,
+      "total_count": 59
+    },
+    "exp_slow_http_001": {
+      "class": "SLOW_HTTP",
+      "partition": "chronological_70_30",
+      "train_count": 35,
+      "test_count": 15,
+      "total_count": 50
+    },
+    "exp_dns_tunnel_001": {
+      "class": "DNS_TUNNEL",
+      "partition": "chronological_70_30",
+      "train_count": 36,
+      "test_count": 16,
+      "total_count": 52
+    },
+    "exp_c2_beacon_001": {
+      "class": "C2_BEACON",
+      "partition": "chronological_70_30",
+      "train_count": 35,
+      "test_count": 15,
+      "total_count": 50
+    }
+  },
+  "baseline_models": [
+    {
+      "model_name": "Dummy (Majority Class)",
+      "train_macro_f1": 0.0949,
+      "train_balanced_acc": 0.1667,
+      "test_macro_precision": 0.0905,
+      "test_macro_recall": 0.1667,
+      "test_macro_f1": 0.1173,
+      "test_weighted_f1": 0.3824,
+      "test_balanced_acc": 0.1667,
+      "per_class": {
+        "BENIGN": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 63
+        },
+        "DDOS": {
+          "precision": 0.5432,
+          "recall": 1.0,
+          "f1": 0.704,
+          "support": 151
+        },
+        "RECON": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 18
+        },
+        "DNS_TUNNEL": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 16
+        },
+        "C2_BEACON": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 15
+        },
+        "SLOW_HTTP": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 15
+        }
+      }
+    },
+    {
+      "model_name": "Logistic Regression (Balanced, RobustScaled)",
+      "train_macro_f1": 0.9943,
+      "train_balanced_acc": 0.9939,
+      "test_macro_precision": 0.7752,
+      "test_macro_recall": 0.7815,
+      "test_macro_f1": 0.6582,
+      "test_weighted_f1": 0.2919,
+      "test_balanced_acc": 0.7815,
+      "per_class": {
+        "BENIGN": {
+          "precision": 0.2228,
+          "recall": 0.6825,
+          "f1": 0.3359,
+          "support": 63
+        },
+        "DDOS": {
+          "precision": 1.0,
+          "recall": 0.0066,
+          "f1": 0.0132,
+          "support": 151
+        },
+        "RECON": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 18
+        },
+        "DNS_TUNNEL": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 16
+        },
+        "C2_BEACON": {
+          "precision": 0.4286,
+          "recall": 1.0,
+          "f1": 0.6,
+          "support": 15
+        },
+        "SLOW_HTTP": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        }
+      }
+    },
+    {
+      "model_name": "Decision Tree (Balanced)",
+      "train_macro_f1": 1.0,
+      "train_balanced_acc": 1.0,
+      "test_macro_precision": 0.5397,
+      "test_macro_recall": 0.5177,
+      "test_macro_f1": 0.414,
+      "test_weighted_f1": 0.2895,
+      "test_balanced_acc": 0.5177,
+      "per_class": {
+        "BENIGN": {
+          "precision": 0.7381,
+          "recall": 0.9841,
+          "f1": 0.8435,
+          "support": 63
+        },
+        "DDOS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 151
+        },
+        "RECON": {
+          "precision": 0.9091,
+          "recall": 0.5556,
+          "f1": 0.6897,
+          "support": 18
+        },
+        "DNS_TUNNEL": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "support": 16
+        },
+        "C2_BEACON": {
+          "precision": 0.5,
+          "recall": 0.0667,
+          "f1": 0.1176,
+          "support": 15
+        },
+        "SLOW_HTTP": {
+          "precision": 0.0909,
+          "recall": 1.0,
+          "f1": 0.1667,
+          "support": 15
+        }
+      }
+    },
+    {
+      "model_name": "Random Forest (Balanced, 100 Trees)",
+      "train_macro_f1": 1.0,
+      "train_balanced_acc": 1.0,
+      "test_macro_precision": 0.6376,
+      "test_macro_recall": 0.6852,
+      "test_macro_f1": 0.5778,
+      "test_weighted_f1": 0.3528,
+      "test_balanced_acc": 0.6852,
+      "per_class": {
+        "BENIGN": {
+          "precision": 0.8182,
+          "recall": 1.0,
+          "f1": 0.9,
+          "support": 63
+        },
+        "DDOS": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 151
+        },
+        "RECON": {
+          "precision": 0.9167,
+          "recall": 0.6111,
+          "f1": 0.7333,
+          "support": 18
+        },
+        "DNS_TUNNEL": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "support": 16
+        },
+        "C2_BEACON": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        },
+        "SLOW_HTTP": {
+          "precision": 0.0909,
+          "recall": 1.0,
+          "f1": 0.1667,
+          "support": 15
+        }
+      }
+    },
+    {
+      "model_name": "HistGradientBoosting (Balanced)",
+      "train_macro_f1": 1.0,
+      "train_balanced_acc": 1.0,
+      "test_macro_precision": 0.8385,
+      "test_macro_recall": 0.804,
+      "test_macro_f1": 0.7941,
+      "test_weighted_f1": 0.8357,
+      "test_balanced_acc": 0.804,
+      "per_class": {
+        "BENIGN": {
+          "precision": 0.863,
+          "recall": 1.0,
+          "f1": 0.9265,
+          "support": 63
+        },
+        "DDOS": {
+          "precision": 0.9355,
+          "recall": 0.7682,
+          "f1": 0.8436,
+          "support": 151
+        },
+        "RECON": {
+          "precision": 0.2326,
+          "recall": 0.5556,
+          "f1": 0.3279,
+          "support": 18
+        },
+        "DNS_TUNNEL": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "support": 16
+        },
+        "C2_BEACON": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        },
+        "SLOW_HTTP": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 15
+        }
+      }
+    }
+  ],
+  "ablation_studies": [
+    {
+      "ablation": "Full 78-D Features",
+      "feature_count": 78,
+      "rf_macro_f1": 0.5778,
+      "rf_bal_acc": 0.6852,
+      "hgb_macro_f1": 0.7941,
+      "hgb_bal_acc": 0.804,
+      "lr_macro_f1": 0.6582,
+      "lr_bal_acc": 0.7815
+    },
+    {
+      "ablation": "Ablation A: Drop 12 Zero-Variance Constant Features (66-D)",
+      "feature_count": 57,
+      "rf_macro_f1": 0.5455,
+      "rf_bal_acc": 0.6481,
+      "hgb_macro_f1": 0.7941,
+      "hgb_bal_acc": 0.804,
+      "lr_macro_f1": 0.6582,
+      "lr_bal_acc": 0.7815
+    },
+    {
+      "ablation": "Ablation B: Drop Zero-Variance + Private IP Indicators (66-D)",
+      "feature_count": 57,
+      "rf_macro_f1": 0.5455,
+      "rf_bal_acc": 0.6481,
+      "hgb_macro_f1": 0.7941,
+      "hgb_bal_acc": 0.804,
+      "lr_macro_f1": 0.6582,
+      "lr_bal_acc": 0.7815
+    },
+    {
+      "ablation": "Ablation C: Drop Port Classification Indicators (75-D)",
+      "feature_count": 54,
+      "rf_macro_f1": 0.5779,
+      "rf_bal_acc": 0.6852,
+      "hgb_macro_f1": 0.7975,
+      "hgb_bal_acc": 0.8132,
+      "lr_macro_f1": 0.6515,
+      "lr_bal_acc": 0.7804
+    }
+  ],
+  "top_10_rf_features": [
+    {
+      "feature_index": 73,
+      "feature_name": "win_pair_delta_t_mean",
+      "importance": 0.05574489228661062
+    },
+    {
+      "feature_index": 71,
+      "feature_name": "win_dst_avg_bytes_per_flow_60s",
+      "importance": 0.055562494936229084
+    },
+    {
+      "feature_index": 7,
+      "feature_name": "bytes_per_packet",
+      "importance": 0.05185653178704626
+    },
+    {
+      "feature_index": 62,
+      "feature_name": "win_src_total_orig_bytes_300s",
+      "importance": 0.049648525357701194
+    },
+    {
+      "feature_index": 0,
+      "feature_name": "flow_duration",
+      "importance": 0.04935216002045678
+    },
+    {
+      "feature_index": 10,
+      "feature_name": "bytes_asymmetry_ratio",
+      "importance": 0.04632144537075233
+    },
+    {
+      "feature_index": 1,
+      "feature_name": "orig_bytes",
+      "importance": 0.04310077299518725
+    },
+    {
+      "feature_index": 76,
+      "feature_name": "win_pair_orig_bytes_std",
+      "importance": 0.03402139352271535
+    },
+    {
+      "feature_index": 8,
+      "feature_name": "orig_bytes_ratio",
+      "importance": 0.03239870539917789
+    },
+    {
+      "feature_index": 32,
+      "feature_name": "dns_numeric_ratio",
+      "importance": 0.03185329027940176
+    }
+  ],
+  "top_10_hgb_features": [
+    {
+      "feature_index": 71,
+      "feature_name": "win_dst_avg_bytes_per_flow_60s",
+      "permutation_importance_mean": 0.10899280575539572,
+      "permutation_importance_std": 0.00992310375836959
+    },
+    {
+      "feature_index": 8,
+      "feature_name": "orig_bytes_ratio",
+      "permutation_importance_mean": 0.07517985611510794,
+      "permutation_importance_std": 0.009712230215827344
+    },
+    {
+      "feature_index": 56,
+      "feature_name": "win_src_flow_count_60s",
+      "permutation_importance_mean": 0.05503597122302162,
+      "permutation_importance_std": 0.012043646793369224
+    },
+    {
+      "feature_index": 59,
+      "feature_name": "win_src_unique_dst_ports_60s",
+      "permutation_importance_mean": 0.05395683453237411,
+      "permutation_importance_std": 0.003940450053993997
+    },
+    {
+      "feature_index": 6,
+      "feature_name": "total_packets",
+      "permutation_importance_mean": 0.05035971223021585,
+      "permutation_importance_std": 0.004550039798803395
+    },
+    {
+      "feature_index": 73,
+      "feature_name": "win_pair_delta_t_mean",
+      "permutation_importance_mean": 0.044604316546762626,
+      "permutation_importance_std": 0.003668359362296975
+    },
+    {
+      "feature_index": 7,
+      "feature_name": "bytes_per_packet",
+      "permutation_importance_mean": 0.03345323741007196,
+      "permutation_importance_std": 0.004271346074474044
+    },
+    {
+      "feature_index": 76,
+      "feature_name": "win_pair_orig_bytes_std",
+      "permutation_importance_mean": 0.02877697841726621,
+      "permutation_importance_std": 0.0062303985883772435
+    },
+    {
+      "feature_index": 28,
+      "feature_name": "dns_query_len",
+      "permutation_importance_mean": 0.025179856115107944,
+      "permutation_importance_std": 0.003940450053994017
+    },
+    {
+      "feature_index": 0,
+      "feature_name": "flow_duration",
+      "permutation_importance_mean": 0.019784172661870526,
+      "permutation_importance_std": 0.004331508841292207
+    }
+  ],
+  "confusion_matrices": {
+    "Dummy (Majority Class)": [
+      [
+        0,
+        63,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        151,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        18,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        16,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        15,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        15,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "Logistic Regression (Balanced, RobustScaled)": [
+      [
+        43,
+        0,
+        0,
+        0,
+        20,
+        0
+      ],
+      [
+        150,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        18,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        16,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        15,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        15
+      ]
+    ],
+    "Decision Tree (Balanced)": [
+      [
+        62,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        150
+      ],
+      [
+        0,
+        8,
+        10,
+        0,
+        0,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        8,
+        0,
+        0
+      ],
+      [
+        14,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        15
+      ]
+    ],
+    "Random Forest (Balanced, 100 Trees)": [
+      [
+        63,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        149
+      ],
+      [
+        5,
+        1,
+        11,
+        0,
+        0,
+        1
+      ],
+      [
+        8,
+        0,
+        0,
+        8,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        15,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        15
+      ]
+    ],
+    "HistGradientBoosting (Balanced)": [
+      [
+        63,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        116,
+        33,
+        0,
+        0,
+        0
+      ],
+      [
+        3,
+        5,
+        10,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        3,
+        0,
+        8,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        15,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        15
+      ]
+    ]
+  }
+}

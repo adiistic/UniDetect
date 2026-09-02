@@ -1,0 +1,25 @@
+{
+  "policy_name": "UniDetect Selective Classification Policy",
+  "abstain_threshold": 0.4,
+  "recon_threshold": 0.35,
+  "active_classes": [
+    "BENIGN",
+    "DDOS",
+    "RECON",
+    "DNS_TUNNEL",
+    "C2_BEACON",
+    "SLOW_HTTP"
+  ],
+  "active_label_ids": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    7
+  ],
+  "decision_actions": {
+    "AUTOMATED_DETECTION": "Confidence >= 0.40 -> Proceed with automated detection pipeline.",
+    "ANALYST_REVIEW": "Confidence < 0.40 -> Low confidence traffic flagged for SOC analyst review."
+  }
+}

@@ -21,6 +21,10 @@ data/.unidetect_checkpoint.json
 # Temporary scratch run directories
 scratch/*/
 
+# Frontend dependencies
+frontend/node_modules/
+.npm/
+
 # IDEs & OS artifacts
 .vscode/
 .idea/

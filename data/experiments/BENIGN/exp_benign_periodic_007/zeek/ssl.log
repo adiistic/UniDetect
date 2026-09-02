@@ -1,0 +1,17 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	ssl
+#open	2026-09-02-09-30-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	version	cipher	curve	server_name	resumed	last_alert	next_protocol	established	ssl_history	cert_chain_fps	client_cert_chain_fps	sni_matches_cert
+#types	time	string	addr	port	addr	port	string	string	string	string	bool	string	string	bool	string	vector[string]	vector[string]	bool
+1788341421.769752	CQngRiKMKFLnvq9Qf	127.0.0.1	38476	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341422.280567	CYYOS64ez8WbdKkON6	127.0.0.1	38478	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341422.786901	CFW2Bs2jX5oReIQB3l	127.0.0.1	38484	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341423.292650	CuEyfMTTEk4z7aVR9	127.0.0.1	38490	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341423.798713	Cqp94jOlOEk3gUaUl	127.0.0.1	38492	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341424.305410	CQ2NZFK00NwEf1eja	127.0.0.1	38506	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341424.814451	CfWbh1X8IdD3eMdsk	127.0.0.1	32990	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+1788341425.320955	CRhYM01hgcIxKsCzmd	127.0.0.1	32992	127.0.0.1	443	TLSv13	TLS_AES_256_GCM_SHA384	X25519MLKEM768	sync.campus.internal	F	-	-	T	CsiI	-	-	-
+#close	2026-09-02-09-30-34

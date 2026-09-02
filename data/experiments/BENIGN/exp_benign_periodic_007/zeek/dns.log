@@ -1,0 +1,19 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	dns
+#open	2026-09-02-09-30-34
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	trans_id	rtt	query	qclass	qclass_name	qtype	qtype_name	rcode	rcode_name	AA	TC	RD	RA	Z	answers	TTLs	rejected
+#types	time	string	addr	port	addr	port	enum	count	interval	string	count	string	count	string	count	string	bool	bool	bool	bool	count	vector[string]	vector[interval]	bool
+1788341418.260937	C4Oxuh3DsuuPJfevV9	127.0.0.1	40044	127.0.0.1	5353	udp	10909	0.000118	auth.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341418.611371	CGoBxSr4M8MGM1XUa	127.0.0.1	37125	127.0.0.1	5353	udp	25858	0.000096	ntp.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341418.961790	COJA5l2JluigVziGvj	127.0.0.1	38878	127.0.0.1	5353	udp	41239	0.000098	db.cluster.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341419.312188	CpBbiy15mRyJeUhRdb	127.0.0.1	38216	127.0.0.1	5353	udp	60461	0.000093	sync.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341419.662631	CoTcIC2l5stajISnWj	127.0.0.1	51899	127.0.0.1	5353	udp	11314	0.000081	mail.campus.internal	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 39 v=spf1 include:_spf.periodic.local ~all	300.000000	F
+1788341420.013119	C1fIbt4XBp9PhaRDw8	127.0.0.1	59401	127.0.0.1	5353	udp	28993	0.000070	auth.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341420.363432	Cwty69sdYysnubzue	127.0.0.1	50713	127.0.0.1	5353	udp	58224	0.000075	ntp.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341420.713891	C4ZrqR2HSa0GYqJkm	127.0.0.1	50807	127.0.0.1	5353	udp	39041	0.000114	db.cluster.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341421.064438	CJ74hB3P8pFgSGZK21	127.0.0.1	40875	127.0.0.1	5353	udp	31458	0.000099	sync.campus.internal	1	C_INTERNET	1	A	0	NOERROR	F	F	T	T	0	127.0.0.1	300.000000	F
+1788341421.414787	CLIo4q2bAUfUK5wkXl	127.0.0.1	51011	127.0.0.1	5353	udp	37818	0.000084	mail.campus.internal	1	C_INTERNET	16	TXT	0	NOERROR	F	F	T	T	0	TXT 39 v=spf1 include:_spf.periodic.local ~all	300.000000	F
+#close	2026-09-02-09-30-34

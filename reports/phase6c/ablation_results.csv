@@ -1,0 +1,6 @@
+ablation_name,feature_count,macro_precision,macro_recall,macro_f1,balanced_accuracy
+Full 78-Dimensional Schema,78,0.8385,0.804,0.7941,0.804
+Ablation A: Drop 12 Zero-Variance Features (66-D),57,0.8385,0.804,0.7941,0.804
+Ablation B: Drop Zero-Variance + Private IP Indicators (66-D),57,0.8385,0.804,0.7941,0.804
+Ablation C: Drop Port Classification Indicators (75-D),54,0.8419,0.8132,0.7975,0.8132
+Ablation D: Drop Flow Rate & Count Sliding Window Metrics (60-D),50,0.4914,0.6759,0.4986,0.6759

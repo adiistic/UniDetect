@@ -1,0 +1,8 @@
+config_name,params,val_macro_f1,val_balanced_acc,test_macro_f1,test_balanced_acc,test_log_loss
+Baseline HGB (Default),"{'l2_regularization': 0.0, 'min_samples_leaf': 20, 'max_leaf_nodes': 31, 'learning_rate': 0.1, 'max_iter': 100}",0.8847,0.8681,0.7941,0.804,1.5162
+HGB Config 1 (L2 Regularized = 1.0),"{'l2_regularization': 1.0, 'min_samples_leaf': 20, 'max_leaf_nodes': 31, 'learning_rate': 0.1, 'max_iter': 100}",0.8824,0.8681,0.5453,0.6759,2.361
+HGB Config 2 (L2 Regularized = 5.0),"{'l2_regularization': 5.0, 'min_samples_leaf': 20, 'max_leaf_nodes': 31, 'learning_rate': 0.1, 'max_iter': 100}",0.8811,0.8681,0.7158,0.7256,1.896
+HGB Config 3 (Conservative Leaf Nodes = 15),"{'l2_regularization': 0.0, 'min_samples_leaf': 20, 'max_leaf_nodes': 15, 'learning_rate': 0.1, 'max_iter': 100}",0.8847,0.8681,0.7941,0.804,1.5119
+HGB Config 4 (Smaller Leaf Samples = 10),"{'l2_regularization': 0.0, 'min_samples_leaf': 10, 'max_leaf_nodes': 31, 'learning_rate': 0.1, 'max_iter': 100}",0.8456,0.8106,0.4402,0.4768,2.6148
+"HGB Config 5 (Lower Learning Rate = 0.05, 150 Iter)","{'l2_regularization': 0.0, 'min_samples_leaf': 20, 'max_leaf_nodes': 31, 'learning_rate': 0.05, 'max_iter': 150}",0.7448,0.7352,0.8212,0.8132,1.5068
+HGB Config 6 (L2 = 1.0 + Leaf Samples = 10),"{'l2_regularization': 1.0, 'min_samples_leaf': 10, 'max_leaf_nodes': 31, 'learning_rate': 0.1, 'max_iter': 100}",0.7518,0.7412,0.571,0.5668,2.2608
