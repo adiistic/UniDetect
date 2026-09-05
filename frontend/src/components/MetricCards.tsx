@@ -1,10 +1,10 @@
 import React from "react";
-import { Activity, ShieldAlert, CheckCircle2, AlertTriangle, Zap } from "lucide-react";
-import type { MetricsResponse, StatusResponse } from "../api/types";
+import type { HealthResponse, MetricsResponse, StatusResponse } from "../api/types";
 
 interface MetricCardsProps {
   metrics: MetricsResponse | null;
   status: StatusResponse | null;
+  health: HealthResponse | null;
   sessionFlowCount: number;
   sessionThreatCount: number;
   sessionReviewCount: number;
@@ -13,98 +13,82 @@ interface MetricCardsProps {
 export const MetricCards: React.FC<MetricCardsProps> = ({
   metrics,
   status,
+  health,
   sessionFlowCount,
   sessionThreatCount,
   sessionReviewCount,
 }) => {
   const totalFlows = metrics?.total_flows ?? status?.processed_flow_count ?? sessionFlowCount;
   const totalThreats = metrics?.total_threats ?? status?.alert_count ?? sessionThreatCount;
-  const totalBenign = metrics?.benign_count ?? Math.max(0, totalFlows - totalThreats - sessionReviewCount);
   const totalReviews = metrics?.analyst_review_count ?? status?.analyst_review_count ?? sessionReviewCount;
-  const avgLatency = metrics?.average_inference_latency_ms ?? 15.8;
-  const p95Latency = metrics?.p95_latency_ms ?? 19.9;
+  const avgLatency = metrics?.average_inference_latency_ms ?? 0.0;
+  const p95Latency = metrics?.p95_latency_ms ?? 0.0;
+
+  const isPipelineHealthy =
+    health?.status === "ok" ||
+    status?.pipeline_status === "PASSIVE_INGESTION_READY" ||
+    status?.pipeline_status === "PASSIVE_INGESTION_STANDBY";
 
   const cards = [
     {
-      label: "TOTAL OBSERVED FLOWS",
+      label: "Flows Processed",
       value: totalFlows.toLocaleString(),
-      subtext: "Passive Zeek connection telemetry",
-      icon: <Activity size={20} color="#38bdf8" />,
-      borderColor: "var(--border-subtle)",
-      badgeBg: "rgba(56, 189, 248, 0.12)",
-      valueColor: "#ffffff",
+      subtext: "Passive Zeek Ingestion",
+      icon: "lan",
+      isPrimary: false,
     },
     {
-      label: "CONFIRMED THREATS",
+      label: "Active Threats",
       value: totalThreats.toLocaleString(),
       subtext: `${totalFlows > 0 ? ((totalThreats / totalFlows) * 100).toFixed(1) : 0}% of observed flows`,
-      icon: <ShieldAlert size={20} color="#ef4444" />,
-      borderColor: "rgba(239, 68, 68, 0.3)",
-      badgeBg: "rgba(239, 68, 68, 0.12)",
-      valueColor: "#ef4444",
+      icon: "crisis_alert",
+      isPrimary: totalThreats > 0,
     },
     {
-      label: "BENIGN BASELINE",
-      value: totalBenign.toLocaleString(),
-      subtext: "Safe background university traffic",
-      icon: <CheckCircle2 size={20} color="#10b981" />,
-      borderColor: "rgba(16, 185, 129, 0.3)",
-      badgeBg: "rgba(16, 185, 129, 0.12)",
-      valueColor: "#10b981",
-    },
-    {
-      label: "ANALYST REVIEW",
+      label: "Analyst Review",
       value: totalReviews.toLocaleString(),
-      subtext: "Selective abstention (Conf < 0.40)",
-      icon: <AlertTriangle size={20} color="#f59e0b" />,
-      borderColor: "rgba(245, 158, 11, 0.3)",
-      badgeBg: "rgba(245, 158, 11, 0.12)",
-      valueColor: "#f59e0b",
+      subtext: "Conf < 0.40 Selective Abstentions",
+      icon: "policy",
+      isPrimary: false,
     },
     {
-      label: "MEAN INFERENCE LATENCY",
-      value: `${avgLatency.toFixed(1)} ms`,
-      subtext: `P95 Latency: ${p95Latency.toFixed(1)} ms`,
-      icon: <Zap size={20} color="#a855f7" />,
-      borderColor: "rgba(168, 85, 247, 0.3)",
-      badgeBg: "rgba(168, 85, 247, 0.12)",
-      valueColor: "#a855f7",
+      label: "Inference Latency",
+      value: avgLatency > 0 ? `${avgLatency.toFixed(1)} ms` : "< 2.0 ms",
+      subtext: p95Latency > 0 ? `P95 Bound: ${p95Latency.toFixed(1)} ms` : "P95 Bound: Sub-20ms",
+      icon: "speed",
+      isPrimary: false,
+    },
+    {
+      label: "Pipeline Health",
+      value: isPipelineHealthy ? "HEALTHY" : "STANDBY",
+      subtext: health?.schema_version ? `Schema v${health.schema_version} (78D)` : "78 Dimensions Active",
+      icon: "verified_user",
+      isPrimary: false,
     },
   ];
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-        gap: "1rem",
-      }}
-    >
-      {cards.map((c, i) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+      {cards.map((card, idx) => (
         <div
-          key={i}
-          className="soc-card"
-          style={{
-            borderColor: c.borderColor,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
+          key={idx}
+          className="bg-[#131316] border border-[#222226] hover:border-[#32323a] rounded-2xl p-4 flex flex-col justify-between transition-all shadow-sm group"
         >
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.6rem" }}>
-            <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "var(--text-muted)", letterSpacing: "0.05em" }}>
-              {c.label}
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider font-mono">
+              {card.label}
             </span>
-            <div style={{ background: c.badgeBg, padding: "0.35rem", borderRadius: "6px" }}>
-              {c.icon}
+            <div className="w-7 h-7 rounded-lg bg-[#1c1c22] border border-[#282830] flex items-center justify-center text-gray-300 group-hover:text-white group-hover:border-[#3c3c48] transition-colors">
+              <span className="material-symbols-outlined text-base">{card.icon}</span>
             </div>
           </div>
+
           <div>
-            <div style={{ fontSize: "1.75rem", fontWeight: 800, color: c.valueColor, fontFamily: "var(--font-mono)" }}>
-              {c.value}
+            <div className="font-headline-sm font-bold text-white tracking-tight font-mono text-xl">
+              {card.value}
             </div>
-            <div style={{ fontSize: "0.74rem", color: "var(--text-secondary)", marginTop: "0.2rem" }}>
-              {c.subtext}
+            <div className="text-[11px] text-gray-400 mt-1 truncate">
+              {card.subtext}
             </div>
           </div>
         </div>

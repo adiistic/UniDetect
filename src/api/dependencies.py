@@ -2,7 +2,7 @@
 FastAPI Dependency Providers for UniDetect State & Services
 """
 
-from typing import Optional
+
 from fastapi import Request
 
 from src.api.state import AlertStore, AppState
@@ -20,7 +20,7 @@ def get_alert_store(request: Request) -> AlertStore:
     return request.app.state.app_state.alert_store
 
 
-def get_inference_pipeline(request: Request) -> Optional[RealtimeInferencePipeline]:
+def get_inference_pipeline(request: Request) -> RealtimeInferencePipeline | None:
     """Retrieves the active RealtimeInferencePipeline instance from AppState."""
     return request.app.state.app_state.pipeline
 

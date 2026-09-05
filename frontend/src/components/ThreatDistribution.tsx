@@ -1,5 +1,4 @@
 import React from "react";
-import { PieChart } from "lucide-react";
 import type { MetricsResponse } from "../api/types";
 
 interface ThreatDistributionProps {
@@ -13,61 +12,53 @@ export const ThreatDistribution: React.FC<ThreatDistributionProps> = ({
 }) => {
   const counts = metrics?.per_class_counts ?? sessionClassCounts;
 
-  const threatConfig: Record<string, { label: string; color: string; bg: string }> = {
-    DDOS: { label: "DDoS Attack", color: "var(--color-ddos)", bg: "var(--color-ddos-bg)" },
-    RECON: { label: "Port Scan / Recon", color: "var(--color-recon)", bg: "var(--color-recon-bg)" },
-    DNS_TUNNEL: { label: "DNS Exfiltration", color: "var(--color-dns)", bg: "var(--color-dns-bg)" },
-    C2_BEACON: { label: "C2 Beaconing", color: "var(--color-c2)", bg: "var(--color-c2-bg)" },
-    SLOW_HTTP: { label: "Slow HTTP DoS", color: "var(--color-slowhttp)", bg: "var(--color-slowhttp-bg)" },
-    BENIGN: { label: "Benign Traffic", color: "var(--color-benign)", bg: "var(--color-benign-bg)" },
+  const threatConfig: Record<string, { label: string; icon: string }> = {
+    DDOS: { label: "DDoS Volumetric", icon: "crisis_alert" },
+    RECON: { label: "Port Scan / Recon", icon: "radar" },
+    DNS_TUNNEL: { label: "DNS Exfiltration", icon: "dns" },
+    C2_BEACON: { label: "C2 Beaconing", icon: "router" },
+    SLOW_HTTP: { label: "Slow HTTP DoS", icon: "hourglass_bottom" },
+    BENIGN: { label: "Benign Baseline", icon: "check_circle" },
   };
 
   const totalCount = Object.values(counts).reduce((acc, v) => acc + v, 0);
 
   return (
-    <div className="soc-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-      <div className="soc-card-header">
-        <span className="soc-card-title">
-          <PieChart size={18} color="#38bdf8" />
-          Threat Modality Breakdown
-        </span>
-        <span style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}>
-          {totalCount} Total Vectors
+    <div className="bg-[#131316] border border-[#222226] rounded-2xl p-6 flex flex-col justify-between shadow-sm">
+      <div className="flex items-center justify-between pb-4 border-b border-[#222226] mb-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-xl bg-white text-black flex items-center justify-center shadow-sm">
+            <span className="material-symbols-outlined text-base">donut_small</span>
+          </div>
+          <span className="font-bold text-white text-base">Threat Modality Breakdown</span>
+        </div>
+        <span className="font-mono text-xs text-gray-400">
+          {totalCount.toLocaleString()} Total Inferences
         </span>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem", flex: 1, justifyContent: "center" }}>
+      <div className="flex flex-col gap-3.5 flex-1 justify-center">
         {Object.entries(threatConfig).map(([key, cfg]) => {
           const count = counts[key] || 0;
           const pct = totalCount > 0 ? (count / totalCount) * 100 : 0;
 
           return (
-            <div key={key} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.78rem" }}>
-                <span style={{ fontWeight: 600, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                  <span style={{ width: 8, height: 8, borderRadius: "50%", background: cfg.color }} />
-                  {cfg.label} ({key})
+            <div key={key} className="flex flex-col gap-1.5">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-gray-300 flex items-center gap-2">
+                  <span className="material-symbols-outlined text-sm text-gray-400">
+                    {cfg.icon}
+                  </span>
+                  {cfg.label}
                 </span>
-                <span style={{ fontFamily: "var(--font-mono)", color: "var(--text-secondary)" }}>
-                  <strong style={{ color: "#ffffff" }}>{count}</strong> ({pct.toFixed(1)}%)
+                <span className="text-gray-400">
+                  <strong className="text-white">{count.toLocaleString()}</strong> ({pct.toFixed(1)}%)
                 </span>
               </div>
-              <div
-                style={{
-                  height: "7px",
-                  background: "var(--bg-surface)",
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                }}
-              >
+              <div className="h-1.5 bg-[#1c1c22] rounded-full overflow-hidden">
                 <div
-                  style={{
-                    height: "100%",
-                    width: `${pct}%`,
-                    background: cfg.color,
-                    borderRadius: "4px",
-                    transition: "width 0.4s ease",
-                  }}
+                  className="h-full bg-white rounded-full transition-all duration-500"
+                  style={{ width: `${pct}%` }}
                 />
               </div>
             </div>

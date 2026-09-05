@@ -6,14 +6,13 @@ import json
 import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Optional, Union
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from src.api.routes import router
-from src.api.state import AppState, DEFAULT_STORE_CAPACITY
+from src.api.state import DEFAULT_STORE_CAPACITY, AppState
 from src.api.websocket import WebSocketManager
 from src.inference.alert import AlertEvent
 
@@ -21,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_app(
-    model_dir: Optional[Union[str, Path]] = None,
+    model_dir: str | Path | None = None,
     store_capacity: int = DEFAULT_STORE_CAPACITY,
 ) -> FastAPI:
     """

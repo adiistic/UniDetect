@@ -2,7 +2,7 @@
 UniDetect FastAPI Backend Package (Phase 8)
 """
 
-from src.api.app import create_app, app
+from src.api.app import app, create_app
 from src.api.schemas import (
     AlertResponse,
     AlertsListResponse,
@@ -15,15 +15,15 @@ from src.api.state import AlertStore, AppState
 from src.api.websocket import WebSocketManager
 
 __all__ = [
-    "create_app",
-    "app",
-    "AlertStore",
-    "AppState",
-    "WebSocketManager",
-    "HealthResponse",
-    "StatusResponse",
     "AlertResponse",
+    "AlertStore",
     "AlertsListResponse",
+    "AppState",
+    "HealthResponse",
     "MetricsResponse",
     "ModelInfoResponse",
+    "StatusResponse",
+    "WebSocketManager",
+    "app",
+    "create_app",
 ]

@@ -2,18 +2,21 @@
 FastAPI REST API Routes for UniDetect Monitoring & Threat Alerting
 """
 
-from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+import csv
+import io
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 
 from src.api.dependencies import (
     get_alert_store,
     get_app_state,
-    get_inference_pipeline,
     get_websocket_manager,
 )
 from src.api.schemas import (
     AlertResponse,
     AlertsListResponse,
+    DecisionUpdateRequest,
     DemoAlertIngestRequest,
     HealthResponse,
     MetricsResponse,
@@ -24,9 +27,13 @@ from src.api.state import AlertStore, AppState
 from src.api.websocket import WebSocketManager
 from src.features.schema import NUM_FEATURES, THREAT_CLASSES
 from src.inference.alert import AlertEvent
-from src.inference.pipeline import RealtimeInferencePipeline
 
 router = APIRouter()
+
+# Type aliases for FastAPI Annotated dependency injection
+AppStateDep = Annotated[AppState, Depends(get_app_state)]
+AlertStoreDep = Annotated[AlertStore, Depends(get_alert_store)]
+WebSocketManagerDep = Annotated[WebSocketManager, Depends(get_websocket_manager)]
 
 
 @router.get(
@@ -35,7 +42,7 @@ router = APIRouter()
     summary="Health & Model Readiness Check",
     tags=["System"],
 )
-def get_health(app_state: AppState = Depends(get_app_state)) -> HealthResponse:
+def get_health(app_state: AppStateDep) -> HealthResponse:
     """Returns the operational health and model loading readiness of the UniDetect backend."""
     model_version = "unknown"
     schema_version = "1.0.0"
@@ -59,8 +66,8 @@ def get_health(app_state: AppState = Depends(get_app_state)) -> HealthResponse:
     tags=["System"],
 )
 def get_status(
-    app_state: AppState = Depends(get_app_state),
-    store: AlertStore = Depends(get_alert_store),
+    app_state: AppStateDep,
+    store: AlertStoreDep,
 ) -> StatusResponse:
     """Returns real-time processing counts, model state, and uptime telemetry."""
     metrics = store.get_metrics()
@@ -82,11 +89,11 @@ def get_status(
     tags=["Alerts"],
 )
 def get_alerts(
+    store: AlertStoreDep,
     limit: int = Query(50, ge=1, le=500, description="Maximum number of alerts to return (1-500)"),
     offset: int = Query(0, ge=0, description="Offset index for pagination"),
-    threat_class: Optional[str] = Query(None, description="Optional class filter (e.g. DDOS, RECON, C2_BEACON, BENIGN)"),
-    decision: Optional[str] = Query(None, description="Optional decision filter (e.g. AUTOMATED_DETECTION, ANALYST_REVIEW)"),
-    store: AlertStore = Depends(get_alert_store),
+    threat_class: str | None = Query(None, description="Optional class filter (e.g. DDOS, RECON, C2_BEACON, BENIGN)"),
+    decision: str | None = Query(None, description="Optional decision filter (e.g. AUTOMATED_DETECTION, ANALYST_REVIEW)"),
 ) -> AlertsListResponse:
     """Returns a paginated list of recently observed threat alerts in reverse chronological order."""
     if threat_class:
@@ -121,6 +128,66 @@ def get_alerts(
 
 
 @router.get(
+    "/api/v1/alerts/export",
+    summary="Export Alerts as CSV or JSON",
+    tags=["Alerts"],
+)
+def export_alerts(
+    store: AlertStoreDep,
+    format: str = Query("csv", pattern="^(csv|json)$", description="Export file format: csv or json"),
+    limit: int = Query(500, ge=1, le=2000, description="Max alerts to export"),
+    threat_class: str | None = Query(None, description="Optional class filter"),
+    decision: str | None = Query(None, description="Optional decision filter"),
+) -> Response:
+    """Exports filtered alert records as a downloadable CSV or JSON file."""
+    items, _ = store.get_alerts(
+        offset=0,
+        limit=limit,
+        class_filter=threat_class,
+        decision_filter=decision,
+    )
+
+    if format == "json":
+        import json
+        payload = json.dumps([a.to_dict() for a in items], indent=2)
+        return Response(
+            content=payload,
+            media_type="application/json",
+            headers={"Content-Disposition": "attachment; filename=unidetect_alerts.json"},
+        )
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([
+        "alert_id", "timestamp_iso", "flow_uid", "source_ip", "source_port",
+        "destination_ip", "destination_port", "protocol", "predicted_label",
+        "confidence", "decision", "abstained", "processing_time_ms"
+    ])
+    for a in items:
+        writer.writerow([
+            a.alert_id,
+            a.timestamp_iso,
+            a.flow_uid,
+            a.source_ip,
+            a.source_port,
+            a.destination_ip,
+            a.destination_port,
+            a.protocol,
+            a.predicted_label,
+            round(a.confidence, 4),
+            a.decision,
+            a.abstained,
+            round(a.processing_time_ms, 2),
+        ])
+
+    return Response(
+        content=output.getvalue(),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=unidetect_alerts.csv"},
+    )
+
+
+@router.get(
     "/api/v1/alerts/{alert_id}",
     response_model=AlertResponse,
     summary="Get Detailed Alert by ID",
@@ -128,7 +195,7 @@ def get_alerts(
 )
 def get_alert_by_id(
     alert_id: str,
-    store: AlertStore = Depends(get_alert_store),
+    store: AlertStoreDep,
 ) -> AlertResponse:
     """Retrieves a single threat detection alert record by its unique alert UUID."""
     alert = store.get_alert_by_id(alert_id)
@@ -140,13 +207,35 @@ def get_alert_by_id(
     return AlertResponse(**alert.to_dict())
 
 
+@router.patch(
+    "/api/v1/alerts/{alert_id}/decision",
+    response_model=AlertResponse,
+    summary="Update Alert Triage Decision",
+    tags=["Alerts"],
+)
+def update_alert_decision(
+    alert_id: str,
+    req: DecisionUpdateRequest,
+    store: AlertStoreDep,
+) -> AlertResponse:
+    """Updates the triage decision verdict for an alert (e.g. sending to Analyst Review or dismissing FP)."""
+    alert = store.update_alert_decision(alert_id, req.decision.strip().upper())
+    if not alert:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Alert with ID '{alert_id}' not found in active alert store.",
+        )
+    return AlertResponse(**alert.to_dict())
+
+
+
 @router.get(
     "/api/v1/metrics",
     response_model=MetricsResponse,
     summary="Inference Latency & Class Distribution Metrics",
     tags=["Metrics"],
 )
-def get_metrics(store: AlertStore = Depends(get_alert_store)) -> MetricsResponse:
+def get_metrics(store: AlertStoreDep) -> MetricsResponse:
     """Returns aggregate flow counters, threat distribution, and inference latency percentiles."""
     m = store.get_metrics()
     return MetricsResponse(
@@ -167,7 +256,7 @@ def get_metrics(store: AlertStore = Depends(get_alert_store)) -> MetricsResponse
     summary="Frozen ML Model & Feature Contract Specification",
     tags=["Model"],
 )
-def get_model_info(app_state: AppState = Depends(get_app_state)) -> ModelInfoResponse:
+def get_model_info(app_state: AppStateDep) -> ModelInfoResponse:
     """Returns technical specifications for the active frozen ML model and decision policy."""
     if not app_state.pipeline or not app_state.pipeline.detector:
         raise HTTPException(
@@ -201,8 +290,8 @@ def get_model_info(app_state: AppState = Depends(get_app_state)) -> ModelInfoRes
 )
 async def ingest_demo_alert(
     payload: DemoAlertIngestRequest,
-    store: AlertStore = Depends(get_alert_store),
-    ws_manager: WebSocketManager = Depends(get_websocket_manager),
+    store: AlertStoreDep,
+    ws_manager: WebSocketManagerDep,
 ) -> AlertResponse:
     """
     Controlled demo and replay telemetry ingestion endpoint.
@@ -215,3 +304,18 @@ async def ingest_demo_alert(
     await ws_manager.broadcast_alert(alert)
     return AlertResponse(**alert.to_dict())
 
+
+@router.post(
+    "/api/v1/alerts/clear",
+    summary="Clear All In-Memory Alerts & Reset Telemetry",
+    tags=["Alerts"],
+)
+def clear_all_alerts(
+    store: AlertStoreDep,
+) -> dict[str, str]:
+    """
+    Clears all in-memory alerts and resets all telemetry counters (flows, threats, reviews)
+    back to clean initial state.
+    """
+    store.clear()
+    return {"status": "ok", "message": "Alert store and telemetry reset to zero"}

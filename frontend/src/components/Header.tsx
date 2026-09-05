@@ -1,164 +1,117 @@
 import React from "react";
-import { Shield, Radio, Cpu, Trash2 } from "lucide-react";
 import type { ConnectionState, HealthResponse } from "../api/types";
+import type { TabType } from "./Sidebar";
 
 interface HeaderProps {
+  activeTab: TabType;
   connectionState: ConnectionState;
   health: HealthResponse | null;
-  onOpenModelDrawer: () => void;
-  onClearAlerts: () => void;
+  isStreamPaused: boolean;
+  onTogglePause: () => void;
+  onClearAlerts?: () => void;
   alertCount: number;
 }
 
 export const Header: React.FC<HeaderProps> = ({
+  activeTab,
   connectionState,
-  health,
-  onOpenModelDrawer,
+  isStreamPaused,
+  onTogglePause,
   onClearAlerts,
   alertCount,
 }) => {
-  const getStatusColor = () => {
-    switch (connectionState) {
-      case "CONNECTED":
-        return { bg: "rgba(16, 185, 129, 0.15)", border: "#10b981", text: "#10b981", label: "LIVE STREAM ACTIVE" };
-      case "CONNECTING":
-      case "RECONNECTING":
-        return { bg: "rgba(245, 158, 11, 0.15)", border: "#f59e0b", text: "#f59e0b", label: "RECONNECTING..." };
-      case "DISCONNECTED":
+  const getTabLabel = (tab: TabType) => {
+    switch (tab) {
+      case "live":
+        return "Live Monitoring";
+      case "alerts":
+        return "Alert History";
+      case "analytics":
+        return "Threat Analytics";
+      case "model":
+        return "Model Intelligence";
+      case "status":
+        return "System Health";
       default:
-        return { bg: "rgba(239, 68, 68, 0.15)", border: "#ef4444", text: "#ef4444", label: "STREAM OFFLINE" };
+        return "Live Monitoring";
     }
   };
 
-  const status = getStatusColor();
+  const isConnected = connectionState === "CONNECTED";
 
   return (
-    <header
-      style={{
-        background: "var(--bg-secondary)",
-        borderBottom: "1px solid var(--border-subtle)",
-        padding: "1rem 2rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        <div
-          style={{
-            background: "linear-gradient(135deg, #0ea5e9, #6366f1)",
-            padding: "0.6rem",
-            borderRadius: "8px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 0 15px rgba(14, 165, 233, 0.4)",
-          }}
-        >
-          <Shield size={26} color="#ffffff" />
-        </div>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <h1
-              style={{
-                fontSize: "1.35rem",
-                fontWeight: 800,
-                letterSpacing: "0.08em",
-                color: "#ffffff",
-                fontFamily: "var(--font-mono)",
-              }}
-            >
-              UNIDETECT <span style={{ color: "#38bdf8" }}>SOC</span>
-            </h1>
-            <span
-              style={{
-                fontSize: "0.65rem",
-                background: "rgba(56, 189, 248, 0.12)",
-                color: "#38bdf8",
-                border: "1px solid rgba(56, 189, 248, 0.3)",
-                padding: "0.15rem 0.5rem",
-                borderRadius: "4px",
-                fontFamily: "var(--font-mono)",
-                fontWeight: 700,
-              }}
-            >
-              REPLAY / LAB MODE
-            </span>
-          </div>
-          <p style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
-            Passive Network Threat Intelligence & Calibrated ML Telemetry
-          </p>
-        </div>
+    <header className="h-16 border-b border-[#1e1e24] bg-[#0a0a0c] flex items-center justify-between px-6 select-none flex-shrink-0 z-20">
+      {/* SOC Top Navigation Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm font-medium">
+        <span className="text-gray-400">UniDetect</span>
+        <span className="text-gray-600 font-mono">/</span>
+        <span className="text-white font-semibold">{getTabLabel(activeTab)}</span>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-        {/* Connection Status Pill */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            background: status.bg,
-            border: `1px solid ${status.border}`,
-            padding: "0.4rem 0.85rem",
-            borderRadius: "6px",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            color: status.text,
-            fontFamily: "var(--font-mono)",
-          }}
-        >
-          <Radio size={14} className={connectionState === "CONNECTED" ? "animate-pulse-glow" : ""} />
-          <span>{status.label}</span>
-        </div>
-
-        {/* Model Spec Button */}
+      {/* Right side controls */}
+      <div className="flex items-center gap-3">
+        {/* Stream Pause / Resume */}
         <button
-          onClick={onOpenModelDrawer}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            background: "var(--bg-surface)",
-            border: "1px solid var(--border-subtle)",
-            color: "var(--text-primary)",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            fontSize: "0.78rem",
-            fontWeight: 600,
-            cursor: "pointer",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-cyan-glow)")}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "var(--border-subtle)")}
+          onClick={onTogglePause}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+            isStreamPaused
+              ? "bg-amber-500/10 text-amber-400 border-amber-500/30 hover:bg-amber-500/20"
+              : "bg-[#141417] text-gray-300 border-[#26262e] hover:text-white hover:bg-[#1a1a20]"
+          }`}
+          title={isStreamPaused ? "Resume Live Ingestion" : "Pause Live Ingestion"}
         >
-          <Cpu size={14} color="#38bdf8" />
-          <span>Model Specs ({health?.model_version ? "v1.0.0" : "Offline"})</span>
+          <span className="material-symbols-outlined text-base">
+            {isStreamPaused ? "play_arrow" : "pause"}
+          </span>
+          <span>{isStreamPaused ? "Stream Paused" : "Stream Active"}</span>
         </button>
 
-        {/* Clear Alerts Button */}
-        {alertCount > 0 && (
+        {/* Clear Feed */}
+        {onClearAlerts && alertCount > 0 && (
           <button
             onClick={onClearAlerts}
-            title="Clear in-browser alert feed"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              background: "rgba(239, 68, 68, 0.1)",
-              border: "1px solid rgba(239, 68, 68, 0.3)",
-              color: "#ef4444",
-              padding: "0.45rem 0.75rem",
-              borderRadius: "6px",
-              fontSize: "0.78rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs text-gray-400 hover:text-red-400 bg-[#141417] border border-[#26262e] transition-colors cursor-pointer"
+            title="Clear In-Memory Alert Stream"
           >
-            <Trash2 size={14} />
+            <span className="material-symbols-outlined text-sm">delete_sweep</span>
             <span>Clear ({alertCount})</span>
           </button>
         )}
+
+        {/* Status indicator badge */}
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#141417] border border-[#26262e] text-xs font-mono">
+          <span
+            className={`w-2 h-2 rounded-full ${
+              isConnected ? "bg-emerald-400 animate-pulse" : "bg-amber-400"
+            }`}
+          />
+          <span className="text-gray-300 font-medium">
+            {isConnected ? "LIVE WS" : "RECONNECTING"}
+          </span>
+        </div>
+
+        {/* Utility Controls */}
+        <div className="flex items-center bg-[#141417] border border-[#26262e] rounded-lg p-0.5 text-gray-400">
+          <button
+            onClick={() => {
+              if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+              } else {
+                document.exitFullscreen().catch(() => {});
+              }
+            }}
+            className="p-1.5 hover:text-white transition-colors rounded cursor-pointer"
+            title="Toggle Fullscreen SOC Mode"
+          >
+            <span className="material-symbols-outlined text-base">fullscreen</span>
+          </button>
+          <span
+            className="p-1.5 text-gray-400"
+            title="Passive Defense Mode Active"
+          >
+            <span className="material-symbols-outlined text-base">security</span>
+          </span>
+        </div>
       </div>
     </header>
   );

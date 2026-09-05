@@ -63,6 +63,36 @@ export async function fetchModelInfo(): Promise<ModelInfoResponse> {
   return res.json();
 }
 
+export async function ingestDemoAlert(alert: Partial<AlertEvent>): Promise<AlertEvent> {
+  const res = await fetch(`${API_BASE}/api/v1/demo/alerts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(alert),
+  });
+  if (!res.ok) throw new Error(`Demo alert ingestion failed: HTTP ${res.status}`);
+  return res.json();
+}
+
+export async function clearBackendAlerts(): Promise<void> {
+  const res = await fetch(`${API_BASE}/api/v1/alerts/clear`, {
+    method: "POST",
+  });
+  if (!res.ok) throw new Error(`Clear alerts failed: HTTP ${res.status}`);
+}
+
+export async function updateAlertDecision(
+  alertId: string,
+  decision: "ANALYST_REVIEW" | "AUTOMATED_DETECTION" | "FALSE_POSITIVE"
+): Promise<AlertEvent> {
+  const res = await fetch(`${API_BASE}/api/v1/alerts/${encodeURIComponent(alertId)}/decision`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ decision }),
+  });
+  if (!res.ok) throw new Error(`Failed to update decision: HTTP ${res.status}`);
+  return res.json();
+}
+
 export interface WebSocketSubscription {
   close: () => void;
 }

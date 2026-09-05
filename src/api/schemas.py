@@ -2,7 +2,8 @@
 Pydantic Schemas for UniDetect FastAPI REST API and WebSocket Events
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -39,13 +40,13 @@ class AlertResponse(BaseModel):
     predicted_class_id: int
     predicted_label: str
     confidence: float
-    probabilities: Dict[str, float]
+    probabilities: dict[str, float]
     abstained: bool
     decision: str
     model_version: str
     schema_version: str
     processing_time_ms: float
-    metadata: Dict[str, Any] = Field(default_factory=dict)
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 class AlertsListResponse(BaseModel):
@@ -53,7 +54,7 @@ class AlertsListResponse(BaseModel):
     total: int = Field(..., example=100)
     offset: int = Field(..., example=0)
     limit: int = Field(..., example=50)
-    items: List[AlertResponse]
+    items: list[AlertResponse]
 
 
 class MetricsResponse(BaseModel):
@@ -63,7 +64,7 @@ class MetricsResponse(BaseModel):
     total_threats: int = Field(..., example=457)
     benign_count: int = Field(..., example=177)
     analyst_review_count: int = Field(..., example=21)
-    per_class_counts: Dict[str, int]
+    per_class_counts: dict[str, int]
     average_inference_latency_ms: float = Field(..., example=15.8)
     p95_latency_ms: float = Field(..., example=19.9)
 
@@ -75,8 +76,8 @@ class ModelInfoResponse(BaseModel):
     feature_count: int = Field(..., example=78)
     schema_version: str = Field(..., example="1.0.0")
     calibration_method: str = Field(..., example="sigmoid")
-    thresholds: Dict[str, float]
-    active_classes: List[str]
+    thresholds: dict[str, float]
+    active_classes: list[str]
 
 
 class DemoAlertIngestRequest(BaseModel):
@@ -87,7 +88,7 @@ class DemoAlertIngestRequest(BaseModel):
     alert_id: str = Field(..., description="Unique UUID for the alert event")
     flow_uid: str = Field(..., description="Zeek connection UID")
     timestamp: float = Field(..., description="UNIX epoch timestamp of the flow")
-    timestamp_iso: Optional[str] = Field(None, description="ISO-8601 UTC timestamp")
+    timestamp_iso: str | None = Field(None, description="ISO-8601 UTC timestamp")
     source_ip: str = Field(..., description="Source IPv4/IPv6 address")
     destination_ip: str = Field(..., description="Destination IPv4/IPv6 address")
     source_port: int = Field(..., ge=0, le=65535, description="Source transport port")
@@ -96,11 +97,16 @@ class DemoAlertIngestRequest(BaseModel):
     predicted_class_id: int = Field(..., description="ML predicted integer class identifier")
     predicted_label: str = Field(..., description="ML predicted threat class label")
     confidence: float = Field(..., ge=0.0, le=1.0, description="Calibrated confidence score (0.0 - 1.0)")
-    probabilities: Dict[str, float] = Field(default_factory=dict, description="Calibrated class probability distribution")
+    probabilities: dict[str, float] = Field(default_factory=dict, description="Calibrated class probability distribution")
     abstained: bool = Field(..., description="Whether inference policy abstained (analyst review required)")
     decision: str = Field(..., description="Operational decision verdict (AUTOMATED_DETECTION | ANALYST_REVIEW | INFERENCE_ERROR)")
     model_version: str = Field(..., description="Version of the model that generated the inference")
     schema_version: str = Field(..., description="Feature schema contract version")
     processing_time_ms: float = Field(..., ge=0.0, description="Pipeline processing latency in milliseconds")
-    metadata: Dict[str, Any] = Field(default_factory=dict, description="Flow summary metadata (duration, bytes, conn_state)")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Flow summary metadata (duration, bytes, conn_state)")
+
+
+class DecisionUpdateRequest(BaseModel):
+    decision: str = Field(..., example="ANALYST_REVIEW", description="Updated triage decision (ANALYST_REVIEW | AUTOMATED_DETECTION | FALSE_POSITIVE)")
+
 

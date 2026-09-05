@@ -9,9 +9,11 @@ env/
 venv/
 ENV/
 
-# Local runtime checkpoints
+# Local runtime checkpoints & databases
 data/.unidetect_checkpoint.json
 *.tmp*
+*.db
+*.sqlite3
 
 # Environment Variables & Local Secrets
 .env

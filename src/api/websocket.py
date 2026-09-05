@@ -4,9 +4,10 @@ Asynchronous WebSocket Manager for Streaming Alert Events to Dashboard Clients
 
 import asyncio
 import logging
-from typing import Any, Dict, List, Set
+from typing import Any
 
 from fastapi import WebSocket
+
 from src.inference.alert import AlertEvent
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ class WebSocketManager:
     """
 
     def __init__(self) -> None:
-        self.active_connections: Set[WebSocket] = set()
+        self.active_connections: set[WebSocket] = set()
         self._lock = asyncio.Lock()
 
     async def connect(self, websocket: WebSocket) -> None:
@@ -36,7 +37,7 @@ class WebSocketManager:
             self.active_connections.discard(websocket)
         logger.info(f"WebSocket client disconnected. Total subscribers: {len(self.active_connections)}")
 
-    async def broadcast_json(self, data: Dict[str, Any]) -> None:
+    async def broadcast_json(self, data: dict[str, Any]) -> None:
         """Broadcasts a raw JSON dictionary to all connected subscribers concurrently."""
         if not self.active_connections:
             return
@@ -44,7 +45,7 @@ class WebSocketManager:
         async with self._lock:
             connections = list(self.active_connections)
 
-        dead_connections: List[WebSocket] = []
+        dead_connections: list[WebSocket] = []
 
         async def send_to_client(ws: WebSocket):
             try:

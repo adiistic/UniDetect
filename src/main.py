@@ -20,7 +20,7 @@ if str(project_root) not in sys.path:
 from src.features.extractor import extract_all_features
 from src.inference.pipeline import RealtimeInferencePipeline
 from src.ingestion.live_pipeline import LiveZeekPipeline
-from src.ingestion.zeek_reader import load_zeek_logs, SUPPORTED_LOG_TYPES
+from src.ingestion.zeek_reader import SUPPORTED_LOG_TYPES, load_zeek_logs
 
 
 def main() -> None:
@@ -111,7 +111,7 @@ def main() -> None:
         else:
             print("[OFFLINE REPLAY MODE]")
             alerts, perf = pipeline.replay_directory(target_dir)
-            print(f"\nReplay Execution Complete:")
+            print("\nReplay Execution Complete:")
             print(f"  Flows Processed:   {perf['total_flows_processed']}")
             print(f"  Threats Detected:  {perf['threats_detected']}")
             print(f"  Analyst Reviews:   {perf['abstained_reviews']}")
