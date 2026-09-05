@@ -10,6 +10,8 @@ with an interactive SOC dashboard and FastAPI streaming interface.
 import argparse
 import json
 import sys
+import time
+import urllib.request
 from pathlib import Path
 
 # Ensure project root is in sys.path when running script directly
@@ -89,24 +91,43 @@ def main() -> None:
 
         if args.live_log_dir:
             print("[LIVE STREAMING MODE]")
+            print(f"Watching active Zeek directory: {target_dir.resolve()}")
+            print(f"Streaming live alerts to console and dashboard (http://127.0.0.1:{args.port})...")
+            print("Press Ctrl+C to stop.\n")
             live_pipe = LiveZeekPipeline(log_dir=target_dir)
+            dashboard_url = f"http://127.0.0.1:{args.port}/api/v1/demo/alerts"
             
             def alert_cb(alert):
                 tag = f"[{alert.decision}]"
                 status = f"THREAT: {alert.predicted_label}" if alert.is_threat else ("REVIEW" if alert.abstained else "BENIGN")
                 print(f"  {tag:<22} {status:<18} | {alert.source_ip}:{alert.source_port} -> {alert.destination_ip}:{alert.destination_port} ({alert.protocol}) | Conf: {alert.confidence:.2f} ({alert.processing_time_ms:.1f}ms)")
+                # Forward alert to running SOC Dashboard
+                try:
+                    req = urllib.request.Request(
+                        dashboard_url,
+                        data=json.dumps(alert.to_dict()).encode("utf-8"),
+                        headers={"Content-Type": "application/json"},
+                    )
+                    urllib.request.urlopen(req, timeout=0.5)
+                except Exception:
+                    pass
 
             poll_fn = pipeline.attach_to_live_pipeline(live_pipe, alert_callback=alert_cb)
-            print("Executing incremental poll pass...")
-            alerts = poll_fn()
-            perf = pipeline.get_performance_summary()
-            print("\nLive Polling Summary:")
-            print(f"  Flows Processed:   {perf['total_flows_processed']}")
-            print(f"  Threats Detected:  {perf['threats_detected']}")
-            print(f"  Analyst Reviews:   {perf['abstained_reviews']}")
-            print(f"  Benign Flows:      {perf['benign_flows']}")
-            print(f"  Mean Latency:      {perf['mean_latency_ms']} ms/flow")
-            return
+
+            try:
+                while True:
+                    poll_fn()
+                    time.sleep(1.0)
+            except KeyboardInterrupt:
+                print("\nStopping live monitoring...")
+                perf = pipeline.get_performance_summary()
+                print("\nLive Polling Summary:")
+                print(f"  Flows Processed:   {perf['total_flows_processed']}")
+                print(f"  Threats Detected:  {perf['threats_detected']}")
+                print(f"  Analyst Reviews:   {perf['abstained_reviews']}")
+                print(f"  Benign Flows:      {perf['benign_flows']}")
+                print(f"  Mean Latency:      {perf['mean_latency_ms']} ms/flow")
+                return
 
         else:
             print("[OFFLINE REPLAY MODE]")

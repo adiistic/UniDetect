@@ -11,6 +11,7 @@ ENV/
 
 # Local runtime checkpoints & databases
 data/.unidetect_checkpoint.json
+data/live_zeek_logs/*.log
 *.tmp*
 *.db
 *.sqlite3
